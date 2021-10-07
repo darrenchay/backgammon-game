@@ -37,14 +37,14 @@ public class BoardController : MonoBehaviour
         {
             edges[i] = createEdge((i + 1) * 0.72f - 3.8f, -2.5f, 0f, i);
         }
-        //Creating bottom right corner (needs to be rotated 180 degrees)
-        for (int j = 0; j < 6; j++) { 
-            edges[j + 12] = createEdge(j * 0.72f - 3.8f, 2f, 180f, j + 12);
-        }
-        //Creating bottom left corner (j + 1 skips the middle bar between sides)
+        //Creating bottom right corner (j + 1 skips the middle bar between sides)
         for (int j = 6; j < 12; j++)
         {
-            edges[j + 12] = createEdge((j+1) * 0.72f - 3.8f, 2f, 180f, j + 12);
+            edges[j + 12] = createEdge((-1 * (j + 1)) * 0.72f + 4.85f, 2f, 180f, j + 12);
+        }
+        //Creating bottom left corner (needs to be rotated 180 degrees)
+        for (int j = 0; j < 6; j++) { 
+            edges[j + 12] = createEdge((-1*j) * 0.72f + 4.8f, 2f, 180f, j + 12);
         }
     }
 
@@ -86,6 +86,8 @@ public class BoardController : MonoBehaviour
         //Naming
         edge.name = "Edge " + i;
 
+        edge.GetComponent<Renderer>().enabled = false; //Comment to show edge skeleton
+
         return edge;
     }
 
@@ -101,14 +103,17 @@ public class BoardController : MonoBehaviour
             //If the input is properly formatted
             if (int.TryParse(fromText.text.ToString(), out from) && from >= 0 && from < 24 && from != to)
             {
-                //Poping piece from the "from" stack
-                GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().popPiece();
+                //Making sure the stack to be put onto is not full (so we do not take from and but not add to)
+                if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30) {
+                    //Poping piece from the "from" stack
+                    GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().popPiece();
 
-                //Making sure the stack is not empty
-                if (piece != null)
-                {
-                    //Pushing piece to new stack
-                    edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().pushPiece(piece.GetComponent<Piece>().getColor());
+                    //Making sure the stack is not empty
+                    if (piece != null)
+                    {
+                        //Pushing piece to new stack
+                        edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().pushPiece(piece.GetComponent<Piece>().getColor());
+                    }
                 }
             }
         }

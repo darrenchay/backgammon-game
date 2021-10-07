@@ -95,4 +95,8 @@ public class Edge : MonoBehaviour
     public int getWhiteCount() {
         return this.whiteCount;
     }
+    //Getter
+    public int getStackSize() {
+        return this.pieces.Count;
+    }
  }
