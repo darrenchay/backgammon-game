@@ -48,6 +48,29 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    // adds pieces to edges according to default backgammon layout.
+    // TODO: should clear the board. Do we have a procedure for this?
+    public void setup_default_piece_positions() {
+        // place white pieces
+        edges[0].GetComponent<Edge>().pushPiece("white");
+        edges[0].GetComponent<Edge>().pushPiece("white");
+        edges[11].GetComponent<Edge>().pushPiece("white");
+        edges[11].GetComponent<Edge>().pushPiece("white");
+        edges[11].GetComponent<Edge>().pushPiece("white");
+        edges[11].GetComponent<Edge>().pushPiece("white");
+        edges[11].GetComponent<Edge>().pushPiece("white");
+        edges[16].GetComponent<Edge>().pushPiece("white");
+        edges[16].GetComponent<Edge>().pushPiece("white");
+        edges[16].GetComponent<Edge>().pushPiece("white");
+        edges[18].GetComponent<Edge>().pushPiece("white");
+        edges[18].GetComponent<Edge>().pushPiece("white");
+        edges[18].GetComponent<Edge>().pushPiece("white");
+        edges[18].GetComponent<Edge>().pushPiece("white");
+        edges[18].GetComponent<Edge>().pushPiece("white");
+
+        // TODO: add red pieces
+    }
+
     // Update is called once per frame
     void Update()
     {
