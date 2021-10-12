@@ -87,6 +87,15 @@ public class Edge : MonoBehaviour
         return ret;
     }
 
+    public void clear_edge() {
+        foreach(GameObject piece in pieces) {
+            Destroy(piece);
+        }
+        this.pieces = new Stack<GameObject>();
+        this.redCount = 0;
+        this.whiteCount = 0;
+    }
+
     //Getter
     public int getRedCount() {
         return this.redCount;

@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class BoardController : MonoBehaviour
 {
+    public const int BACKGAMMON_EDGE_COUNT = 24;
     //Text and input used for demo
     public Text countText;
     public Text fromText;
@@ -24,7 +25,7 @@ public class BoardController : MonoBehaviour
     void Start()
     {
         //Initializing edges (24 edges per backgammon table)
-        edges = new GameObject[24];
+        edges = new GameObject[BACKGAMMON_EDGE_COUNT];
 
         //Creating edges and positioning them
 
@@ -48,9 +49,16 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    public void clear_board() {
+        for (int i = 0; i < BACKGAMMON_EDGE_COUNT; i++) {
+            edges[i].GetComponent<Edge>().clear_edge();
+        }
+    }
+
     // adds pieces to edges according to default backgammon layout.
-    // TODO: should clear the board. Do we have a procedure for this?
     public void setup_default_piece_positions() {
+        clear_board();
+
         // place white pieces
         edges[0].GetComponent<Edge>().pushPiece("white");
         edges[0].GetComponent<Edge>().pushPiece("white");
@@ -76,17 +84,17 @@ public class BoardController : MonoBehaviour
     {
         //Updating the pice counter for the demo
         int number;
-        if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < 24)
+        if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < BACKGAMMON_EDGE_COUNT)
         {
             countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().getRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().getWhiteCount() + "";
         }
-        }
+    }
 
     //Creates a new piece and adds it to the edge taken from user input
     public void addPieceToEdge(string color) {
         int number;
         //Making sure the input is an int and in range
-        if (int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < 24)
+        if (int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < BACKGAMMON_EDGE_COUNT)
         {
             //Creating and pushing a piece of color "color" to the users stack (edge)
             edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().pushPiece(color);
@@ -121,10 +129,10 @@ public class BoardController : MonoBehaviour
     public void movePiece() {
         int to;
         int from;
-        if (int.TryParse(toText.text.ToString(), out to) && to >= 0 && to < 24)
+        if (int.TryParse(toText.text.ToString(), out to) && to >= 0 && to < BACKGAMMON_EDGE_COUNT)
         {
             //If the input is properly formatted
-            if (int.TryParse(fromText.text.ToString(), out from) && from >= 0 && from < 24 && from != to)
+            if (int.TryParse(fromText.text.ToString(), out from) && from >= 0 && from < BACKGAMMON_EDGE_COUNT && from != to)
             {
                 //Making sure the stack to be put onto is not full (so we do not take from and but not add to)
                 if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30) {
