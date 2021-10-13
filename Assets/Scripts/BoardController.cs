@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 
 public class BoardController : MonoBehaviour
 {
-
     //Text and input used for demo
     public Text countText;
     public Text fromText;
@@ -70,9 +69,16 @@ public class BoardController : MonoBehaviour
 
     }
 
+    public void clear_board() {
+        for (int i = 0; i < BACKGAMMON_EDGE_COUNT; i++) {
+            edges[i].GetComponent<Edge>().clear_edge();
+        }
+    }
+
     // adds pieces to edges according to default backgammon layout.
-    // TODO: should clear the board. Do we have a procedure for this?
     public void setup_default_piece_positions() {
+        clear_board();
+
         // place white pieces
         edges[0].GetComponent<Edge>().pushPiece("white");
         edges[0].GetComponent<Edge>().pushPiece("white");

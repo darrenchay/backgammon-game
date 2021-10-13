@@ -4229,7 +4229,9 @@ GameObject:
   - component: {fileID: 4770383132367064333}
   - component: {fileID: 4770383132367064332}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: 
+  
+  Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5486,6 +5488,7 @@ RectTransform:
   - {fileID: 7977278576797811617}
   - {fileID: 7977278577965221844}
   - {fileID: 1608029600}
+  - {fileID: 1533756640}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
