@@ -70,7 +70,7 @@ public class BoardController : MonoBehaviour
     }
 
     public void clear_board() {
-        for (int i = 0; i < BACKGAMMON_EDGE_COUNT; i++) {
+        for (int i = 0; i < edgeCount; i++) {
             edges[i].GetComponent<Edge>().clear_edge();
         }
     }
