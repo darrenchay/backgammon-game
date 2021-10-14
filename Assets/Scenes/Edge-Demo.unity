@@ -4177,9 +4177,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2091141182546773730}
+      - m_Target: {fileID: 2091141182546773731}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: addPieceToEdge
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
