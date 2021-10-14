@@ -76,7 +76,21 @@ public class BoardController : MonoBehaviour
         edges[18].GetComponent<Edge>().pushPiece("white");
         edges[18].GetComponent<Edge>().pushPiece("white");
 
-        // TODO: add red pieces
+        edges[5].GetComponent<Edge>().pushPiece("red");
+        edges[5].GetComponent<Edge>().pushPiece("red");
+        edges[5].GetComponent<Edge>().pushPiece("red");
+        edges[5].GetComponent<Edge>().pushPiece("red");
+        edges[5].GetComponent<Edge>().pushPiece("red");
+        edges[7].GetComponent<Edge>().pushPiece("red");
+        edges[7].GetComponent<Edge>().pushPiece("red");
+        edges[7].GetComponent<Edge>().pushPiece("red");
+        edges[12].GetComponent<Edge>().pushPiece("red");
+        edges[12].GetComponent<Edge>().pushPiece("red");
+        edges[12].GetComponent<Edge>().pushPiece("red");
+        edges[12].GetComponent<Edge>().pushPiece("red");
+        edges[12].GetComponent<Edge>().pushPiece("red");
+        edges[23].GetComponent<Edge>().pushPiece("red");
+        edges[23].GetComponent<Edge>().pushPiece("red");
     }
 
     // Update is called once per frame
