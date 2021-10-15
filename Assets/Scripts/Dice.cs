@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour
 {
-    static Rigidbody rb;
-    public static Vector3 diceVel;
+    private Rigidbody rb;
+    private Vector3 diceVel;
     public int diceNum;
 
     //Array holding the different faces
@@ -15,7 +15,6 @@ public class Dice : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        diceNum = 0;
 
         //Creating the face sides
         faceSides = new GameObject[6];
@@ -25,6 +24,7 @@ public class Dice : MonoBehaviour
         }
     }
 
+    // Creates a face side game object with a sphere collider and dice face script
     private GameObject createFaceSide(int i)
     {
         GameObject faceSide = new GameObject();
@@ -43,30 +43,35 @@ public class Dice : MonoBehaviour
         faceSide.GetComponent<SphereCollider>().isTrigger = true;
 
         //Naming the side gameObject
-        faceSide.name = "Side " + (i+1);
+        faceSide.name = "Side " + (i + 1);
 
         //Setting their position relative to the dice and the faceup value
         if (i == 0)
         {
             faceSide.transform.localPosition = new Vector3(0, 0, -2.0f);
             faceSide.GetComponent<DiceFace>().setFaceUp(6);
-        } else if (i == 1)
+        }
+        else if (i == 1)
         {
             faceSide.transform.localPosition = new Vector3(0, -2.0f, 0);
             faceSide.GetComponent<DiceFace>().setFaceUp(3);
-        } else if (i == 2)
+        }
+        else if (i == 2)
         {
             faceSide.transform.localPosition = new Vector3(0, 2.0f, 0);
             faceSide.GetComponent<DiceFace>().setFaceUp(2);
-        }  else if (i == 3)
+        }
+        else if (i == 3)
         {
             faceSide.transform.localPosition = new Vector3(-2.0f, 0, 0);
             faceSide.GetComponent<DiceFace>().setFaceUp(5);
-        } else if (i == 4)
+        }
+        else if (i == 4)
         {
             faceSide.transform.localPosition = new Vector3(2.0f, 0, 0);
             faceSide.GetComponent<DiceFace>().setFaceUp(4);
-        } else if (i == 5)
+        }
+        else if (i == 5)
         {
             faceSide.transform.localPosition = new Vector3(0, 0, 2.0f);
             faceSide.GetComponent<DiceFace>().setFaceUp(1);
@@ -80,7 +85,7 @@ public class Dice : MonoBehaviour
     {
         diceVel = rb.velocity;
 
-        if(Input.GetKeyDown (KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             DiceNum.diceNumber1 = 0;
             DiceNum.diceNumber2 = 0;
@@ -89,22 +94,27 @@ public class Dice : MonoBehaviour
             float forceX = Random.Range(100, 5000);
             float forceY = Random.Range(100, 5000);
             float forceZ = Random.Range(100, 5000);
-             
-            // Resetting dice position and rotation before throwing
-            transform.position = new Vector3(0, 2, 0);
-            transform.rotation = Quaternion.identity;
 
+            // Resetting dice position and rotation before throwing
+            if (diceNum == 1)
+            {
+                transform.position = new Vector3(-1, 3, -1);
+                transform.rotation = Quaternion.identity;
+            } else {
+                transform.position = new Vector3(2, 2, -1);
+                transform.rotation = Quaternion.identity;
+            }
             // Setting the throw force
             rb.AddForce(transform.up * 1000);
             int direction = Random.Range(1, 3);
-            if(direction == 1)
+            if (direction == 1)
             {
                 rb.AddForce(-transform.forward * 1000);
             }
             else if (direction == 2)
             {
                 rb.AddForce(transform.right * 1000);
-            } 
+            }
             else if (direction == 3)
             {
                 rb.AddForce(-transform.right * 1000);
@@ -114,5 +124,10 @@ public class Dice : MonoBehaviour
             rb.AddTorque(forceX, forceY, forceZ);
 
         }
+    }
+
+    public Vector3 getDiceVel()
+    {
+        return diceVel;
     }
 }

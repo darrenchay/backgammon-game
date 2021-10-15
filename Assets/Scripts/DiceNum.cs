@@ -18,7 +18,7 @@ public class DiceNum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Dice 1 Roll: " +  diceNumber1.ToString() + ", Dice 2: " + diceNumber2;
+        text.text = "Dice 1 Roll: " +  diceNumber1.ToString() + ", Dice 2: " + diceNumber2.ToString();
         
     }
 }
