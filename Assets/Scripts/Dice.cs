@@ -6,11 +6,73 @@ public class Dice : MonoBehaviour
 {
     static Rigidbody rb;
     public static Vector3 diceVel;
+    public int diceNum;
+
+    //Array holding the different faces
+    private GameObject[] faceSides;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        diceNum = 0;
+
+        //Creating the face sides
+        faceSides = new GameObject[6];
+        for (int i = 0; i < 6; i++)
+        {
+            faceSides[i] = createFaceSide(i);
+        }
+    }
+
+    private GameObject createFaceSide(int i)
+    {
+        GameObject faceSide = new GameObject();
+        //Making face side a child of dice
+
+        faceSide.transform.parent = gameObject.transform;
+        // Setting scale
+        faceSide.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+        // Adding dice face script and setting dice num
+        faceSide.AddComponent<DiceFace>();
+        faceSide.GetComponent<DiceFace>().setDiceNum(diceNum);
+
+        //Adding the sphere collider component, and setting isTrigger to true
+        faceSide.AddComponent<SphereCollider>();
+        faceSide.GetComponent<SphereCollider>().isTrigger = true;
+
+        //Naming the side gameObject
+        faceSide.name = "Side " + (i+1);
+
+        //Setting their position relative to the dice and the faceup value
+        if (i == 0)
+        {
+            faceSide.transform.localPosition = new Vector3(0, 0, -2.0f);
+            faceSide.GetComponent<DiceFace>().setFaceUp(6);
+        } else if (i == 1)
+        {
+            faceSide.transform.localPosition = new Vector3(0, -2.0f, 0);
+            faceSide.GetComponent<DiceFace>().setFaceUp(3);
+        } else if (i == 2)
+        {
+            faceSide.transform.localPosition = new Vector3(0, 2.0f, 0);
+            faceSide.GetComponent<DiceFace>().setFaceUp(2);
+        }  else if (i == 3)
+        {
+            faceSide.transform.localPosition = new Vector3(-2.0f, 0, 0);
+            faceSide.GetComponent<DiceFace>().setFaceUp(5);
+        } else if (i == 4)
+        {
+            faceSide.transform.localPosition = new Vector3(2.0f, 0, 0);
+            faceSide.GetComponent<DiceFace>().setFaceUp(4);
+        } else if (i == 5)
+        {
+            faceSide.transform.localPosition = new Vector3(0, 0, 2.0f);
+            faceSide.GetComponent<DiceFace>().setFaceUp(1);
+        }
+
+        return faceSide;
     }
 
     // Update is called once per frame
@@ -20,7 +82,8 @@ public class Dice : MonoBehaviour
 
         if(Input.GetKeyDown (KeyCode.Space))
         {
-            DiceNum.diceNumber = 0;
+            DiceNum.diceNumber1 = 0;
+            DiceNum.diceNumber2 = 0;
 
             // Setting the spin for the dice roll
             float forceX = Random.Range(100, 5000);
