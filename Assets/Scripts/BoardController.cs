@@ -69,15 +69,10 @@ public class BoardController : MonoBehaviour
 
     }
 
-    public void clear_board() {
+    public void setupDefaultPiecePositions() {
         for (int i = 0; i < edgeCount; i++) {
-            edges[i].GetComponent<Edge>().clear_edge();
+            edges[i].GetComponent<Edge>().clearEdge();
         }
-    }
-
-    // adds pieces to edges according to default backgammon layout.
-    public void setup_default_piece_positions() {
-        clear_board();
 
         // place white pieces
         edges[0].GetComponent<Edge>().pushPiece("white");
