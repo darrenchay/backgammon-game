@@ -87,7 +87,8 @@ public class Edge : MonoBehaviour
         return ret;
     }
 
-    public void clearEdge() {
+    public void clearEdge() 
+    {
         foreach(GameObject piece in pieces) {
             Destroy(piece);
         }

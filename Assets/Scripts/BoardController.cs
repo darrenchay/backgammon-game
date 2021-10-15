@@ -69,7 +69,8 @@ public class BoardController : MonoBehaviour
 
     }
 
-    public void setupDefaultPiecePositions() {
+    public void setupDefaultPiecePositions() 
+    {
         for (int i = 0; i < edgeCount; i++) {
             edges[i].GetComponent<Edge>().clearEdge();
         }
