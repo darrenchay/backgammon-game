@@ -44,8 +44,9 @@ public class BoardController : MonoBehaviour
         //Creating edges and positioning them
 
         //Creating top right corner
-        for (int i = 0; i < 6; i++) {
-            edges[i] = createEdge(i * 0.72f - 3.8f, - 2.5f, 0f, i);
+        for (int i = 0; i < 6; i++)
+        {
+            edges[i] = createEdge(i * 0.72f - 3.8f, -2.5f, 0f, i);
         }
         //Creating top left corner (i + 1 skips the middle bar between sides)
         for (int i = 6; i < 12; i++)
@@ -58,22 +59,24 @@ public class BoardController : MonoBehaviour
             edges[j + 12] = createEdge((-1 * (j + 1)) * 0.72f + 4.85f, 2f, 180f, j + 12);
         }
         //Creating bottom left corner (needs to be rotated 180 degrees)
-        for (int j = 0; j < 6; j++) { 
-            edges[j + 12] = createEdge((-1*j) * 0.72f + 4.8f, 2f, 180f, j + 12);
+        for (int j = 0; j < 6; j++)
+        {
+            edges[j + 12] = createEdge((-1 * j) * 0.72f + 4.8f, 2f, 180f, j + 12);
         }
 
         //Creating Born Off "edges"
         edges[24] = createEdge(-5f, -2.5f, 180f, 24);
-        edges[25] = createEdge(-5f, 2f , 0f, 25);
+        edges[25] = createEdge(-5f, 2f, 0f, 25);
 
 
     }
 
-    public void setupDefaultPiecePositions() 
+    public void SetupDefaultPiecePositions()
     {
         // clear all the edges
-        for (int i = 0; i < edgeCount; i++) {
-            edges[i].GetComponent<Edge>().clearEdge();
+        for (int i = 0; i < edgeCount; i++)
+        {
+            edges[i].GetComponent<Edge>().ClearEdge();
         }
 
         // place white pieces
@@ -132,23 +135,26 @@ public class BoardController : MonoBehaviour
         }
 
         //Checking if white won
-        if (edges[25].GetComponent<Edge>().getStackSize() == 15) {
+        if (edges[25].GetComponent<Edge>().getStackSize() == 15)
+        {
             whiteWins();
         }
-        }
+    }
 
     //Screen when red wins
-    public void redWins() {
-      //Hiding and showing needed screens
-      edgeNumbers.SetActive(false);
-      winScreen.SetActive(true);
-      gameUI.SetActive(false);
-      //Changing winning symbol color 
-      winSymbol.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
-      winText.text = "RED WINS!!!";
-}
+    public void redWins()
+    {
+        //Hiding and showing needed screens
+        edgeNumbers.SetActive(false);
+        winScreen.SetActive(true);
+        gameUI.SetActive(false);
+        //Changing winning symbol color 
+        winSymbol.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        winText.text = "RED WINS!!!";
+    }
     //Screen when white wins
-    public void whiteWins() {
+    public void whiteWins()
+    {
         //Hiding and showing needed screens
         edgeNumbers.SetActive(false);
         winScreen.SetActive(true);
@@ -159,12 +165,14 @@ public class BoardController : MonoBehaviour
     }
 
     //Restarts the scene
-    public void restart() {
+    public void restart()
+    {
         SceneManager.LoadScene("Edge-Demo");
     }
 
     //Creates a new piece and adds it to the edge taken from user input
-    public void addPieceToEdge(string color) {
+    public void addPieceToEdge(string color)
+    {
         int number;
         //Making sure the input is an int and in range
         if (int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
@@ -175,7 +183,8 @@ public class BoardController : MonoBehaviour
     }
 
     //Creates an edge (visible for demo)
-    private GameObject createEdge(float x, float y, float rotation, int i) {
+    private GameObject createEdge(float x, float y, float rotation, int i)
+    {
         //Creating empty cube and changing position, scale, and rotation (for the bottom half of board)
         GameObject edge = GameObject.CreatePrimitive(PrimitiveType.Cube);
         edge.transform.position = new Vector3(x, 0, y);
@@ -199,7 +208,8 @@ public class BoardController : MonoBehaviour
      * to: toText
      * from: fromText
      * **/
-    public void movePiece() {
+    public void movePiece()
+    {
         int to;
         int from;
         if (int.TryParse(toText.text.ToString(), out to) && to >= 0 && to < edgeCount)
@@ -208,7 +218,8 @@ public class BoardController : MonoBehaviour
             if (int.TryParse(fromText.text.ToString(), out from) && from >= 0 && from < edgeCount && from != to)
             {
                 //Making sure the stack to be put onto is not full (so we do not take from but not add to)
-                if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30) {
+                if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30)
+                {
                     //Poping piece from the "from" stack
                     GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().popPiece();
 
@@ -221,6 +232,6 @@ public class BoardController : MonoBehaviour
                 }
             }
         }
-     }
+    }
 
 }
