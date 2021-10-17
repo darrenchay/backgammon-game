@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * DICE 
+ * Used to create a dice component and its related childs
+ * **/
 public class Dice : MonoBehaviour
 {
     private Rigidbody rb;
@@ -20,12 +24,12 @@ public class Dice : MonoBehaviour
         faceSides = new GameObject[6];
         for (int i = 0; i < 6; i++)
         {
-            faceSides[i] = createFaceSide(i);
+            faceSides[i] = CreateFaceSide(i);
         }
     }
 
     // Creates a face side game object with a sphere collider and dice face script
-    private GameObject createFaceSide(int i)
+    private GameObject CreateFaceSide(int i)
     {
         GameObject faceSide = new GameObject();
         //Making face side a child of dice
@@ -36,7 +40,7 @@ public class Dice : MonoBehaviour
 
         // Adding dice face script and setting dice num
         faceSide.AddComponent<DiceFace>();
-        faceSide.GetComponent<DiceFace>().setDiceNum(diceNum);
+        faceSide.GetComponent<DiceFace>().SetDiceNum(diceNum);
 
         //Adding the sphere collider component, and setting isTrigger to true
         faceSide.AddComponent<SphereCollider>();
@@ -49,32 +53,32 @@ public class Dice : MonoBehaviour
         if (i == 0)
         {
             faceSide.transform.localPosition = new Vector3(0, 0, -2.0f);
-            faceSide.GetComponent<DiceFace>().setFaceUp(6);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(6);
         }
         else if (i == 1)
         {
             faceSide.transform.localPosition = new Vector3(0, -2.0f, 0);
-            faceSide.GetComponent<DiceFace>().setFaceUp(3);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(3);
         }
         else if (i == 2)
         {
             faceSide.transform.localPosition = new Vector3(0, 2.0f, 0);
-            faceSide.GetComponent<DiceFace>().setFaceUp(2);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(2);
         }
         else if (i == 3)
         {
             faceSide.transform.localPosition = new Vector3(-2.0f, 0, 0);
-            faceSide.GetComponent<DiceFace>().setFaceUp(5);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(5);
         }
         else if (i == 4)
         {
             faceSide.transform.localPosition = new Vector3(2.0f, 0, 0);
-            faceSide.GetComponent<DiceFace>().setFaceUp(4);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(4);
         }
         else if (i == 5)
         {
             faceSide.transform.localPosition = new Vector3(0, 0, 2.0f);
-            faceSide.GetComponent<DiceFace>().setFaceUp(1);
+            faceSide.GetComponent<DiceFace>().SetFaceUp(1);
         }
 
         return faceSide;
@@ -126,7 +130,7 @@ public class Dice : MonoBehaviour
         }
     }
 
-    public Vector3 getDiceVel()
+    public Vector3 GetDiceVel()
     {
         return diceVel;
     }

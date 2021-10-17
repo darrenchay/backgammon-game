@@ -12,7 +12,7 @@ public class Piece : MonoBehaviour
     private string color;
 
     //Sets the color of the mesh per object (red or white)
-    public void setColor(string color)
+    public void SetColor(string color)
     {
         if (color == "red")
         {
@@ -32,7 +32,7 @@ public class Piece : MonoBehaviour
     }
 
     //Getter
-    public string getColor()
+    public string GetColor()
     {
         return this.color;
     }

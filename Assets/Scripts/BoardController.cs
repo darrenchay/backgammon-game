@@ -120,29 +120,29 @@ public class BoardController : MonoBehaviour
         int number;
         if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
         {
-            countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().getRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().getWhiteCount() + "";
+            countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetWhiteCount() + "";
         }
 
         //Updating red and white born off counts
-        redBornCount.GetComponent<TextMesh>().text = edges[24].GetComponent<Edge>().getStackSize().ToString();
-        whiteBornCount.GetComponent<TextMesh>().text = edges[25].GetComponent<Edge>().getStackSize().ToString();
+        redBornCount.GetComponent<TextMesh>().text = edges[24].GetComponent<Edge>().GetStackSize().ToString();
+        whiteBornCount.GetComponent<TextMesh>().text = edges[25].GetComponent<Edge>().GetStackSize().ToString();
 
 
         //Checking if red won
-        if (edges[24].GetComponent<Edge>().getStackSize() == 15)
+        if (edges[24].GetComponent<Edge>().GetStackSize() == 15)
         {
-            redWins();
+            RedWins();
         }
 
         //Checking if white won
-        if (edges[25].GetComponent<Edge>().getStackSize() == 15)
+        if (edges[25].GetComponent<Edge>().GetStackSize() == 15)
         {
-            whiteWins();
+            WhiteWins();
         }
     }
 
     //Screen when red wins
-    public void redWins()
+    public void RedWins()
     {
         //Hiding and showing needed screens
         edgeNumbers.SetActive(false);
@@ -153,7 +153,7 @@ public class BoardController : MonoBehaviour
         winText.text = "RED WINS!!!";
     }
     //Screen when white wins
-    public void whiteWins()
+    public void WhiteWins()
     {
         //Hiding and showing needed screens
         edgeNumbers.SetActive(false);
@@ -165,7 +165,7 @@ public class BoardController : MonoBehaviour
     }
 
     //Restarts the scene
-    public void restart()
+    public void Restart()
     {
         SceneManager.LoadScene("Edge-Demo");
     }
@@ -218,7 +218,7 @@ public class BoardController : MonoBehaviour
             if (int.TryParse(fromText.text.ToString(), out from) && from >= 0 && from < edgeCount && from != to)
             {
                 //Making sure the stack to be put onto is not full (so we do not take from but not add to)
-                if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30)
+                if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().GetStackSize() < 30)
                 {
                     //Poping piece from the "from" stack
                     GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().PopPiece();
@@ -227,7 +227,7 @@ public class BoardController : MonoBehaviour
                     if (piece != null)
                     {
                         //Pushing piece to new stack
-                        edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().PushPiece(piece.GetComponent<Piece>().getColor());
+                        edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().PushPiece(piece.GetComponent<Piece>().GetColor());
                     }
                 }
             }

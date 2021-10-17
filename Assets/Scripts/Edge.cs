@@ -30,7 +30,7 @@ public class Edge : MonoBehaviour
         piece.transform.parent = gameObject.transform;
         piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
         piece.AddComponent<Piece>();
-        piece.GetComponent<Piece>().setColor(color);
+        piece.GetComponent<Piece>().SetColor(color);
 
         return piece;
     }
@@ -74,11 +74,11 @@ public class Edge : MonoBehaviour
         GameObject temp = this.pieces.Pop();
 
         //Decreasing counters
-        if (temp.GetComponent<Piece>().getColor() == "red")
+        if (temp.GetComponent<Piece>().GetColor() == "red")
         {
             redCount--;
         }
-        else if (temp.GetComponent<Piece>().getColor() == "white")
+        else if (temp.GetComponent<Piece>().GetColor() == "white")
         {
             whiteCount--;
         }
@@ -103,17 +103,17 @@ public class Edge : MonoBehaviour
     }
 
     //Getter
-    public int getRedCount()
+    public int GetRedCount()
     {
         return this.redCount;
     }
     //Getter
-    public int getWhiteCount()
+    public int GetWhiteCount()
     {
         return this.whiteCount;
     }
     //Getter
-    public int getStackSize()
+    public int GetStackSize()
     {
         return this.pieces.Count;
     }
