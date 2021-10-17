@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * DICENUM 
+ * Used to record the faceup values of the dies
+ * **/
 public class DiceNum : MonoBehaviour
 {
     public static int diceNumber1;

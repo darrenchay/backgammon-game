@@ -23,23 +23,24 @@ public class Edge : MonoBehaviour
     }
 
     //Used to create a piece
-    private GameObject createPiece(string color) 
+    private GameObject CreatePiece(string color)
     {
         GameObject piece = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         piece.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
         piece.transform.parent = gameObject.transform;
         piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
         piece.AddComponent<Piece>();
-        piece.GetComponent<Piece>().setColor(color);
+        piece.GetComponent<Piece>().SetColor(color);
 
         return piece;
     }
 
     //Pushes a new piece to the stack based on the color
-    public void pushPiece(string color) 
+    public void PushPiece(string color)
     {
         //Making sure stack is not full (max number of backgammon pieces)
-        if (this.pieces.Count == 30) {
+        if (this.pieces.Count == 30)
+        {
             return;
         }
 
@@ -48,22 +49,24 @@ public class Edge : MonoBehaviour
         {
             redCount++;
         }
-        else if (color == "white") {
+        else if (color == "white")
+        {
             whiteCount++;
         }
 
         //Creating piece
-        GameObject piece = createPiece(color);
+        GameObject piece = CreatePiece(color);
 
         //Pusing piece
         this.pieces.Push(piece);
     }
 
     //Pops the stack and destroys the piece to be copied to another stack
-    public GameObject popPiece()
+    public GameObject PopPiece()
     {
         //If the stack is empty return null
-        if (this.pieces.Count == 0) {
+        if (this.pieces.Count == 0)
+        {
             return null;
         }
 
@@ -71,11 +74,12 @@ public class Edge : MonoBehaviour
         GameObject temp = this.pieces.Pop();
 
         //Decreasing counters
-        if (temp.GetComponent<Piece>().getColor() == "red")
+        if (temp.GetComponent<Piece>().GetColor() == "red")
         {
             redCount--;
         }
-        else if (temp.GetComponent<Piece>().getColor() == "white") {
+        else if (temp.GetComponent<Piece>().GetColor() == "white")
+        {
             whiteCount--;
         }
 
@@ -87,8 +91,10 @@ public class Edge : MonoBehaviour
         return ret;
     }
 
-    public void clear_edge() {
-        foreach(GameObject piece in pieces) {
+    public void ClearEdge()
+    {
+        foreach (GameObject piece in pieces)
+        {
             Destroy(piece);
         }
         this.pieces = new Stack<GameObject>();
@@ -97,15 +103,18 @@ public class Edge : MonoBehaviour
     }
 
     //Getter
-    public int getRedCount() {
+    public int GetRedCount()
+    {
         return this.redCount;
     }
     //Getter
-    public int getWhiteCount() {
+    public int GetWhiteCount()
+    {
         return this.whiteCount;
     }
     //Getter
-    public int getStackSize() {
+    public int GetStackSize()
+    {
         return this.pieces.Count;
     }
- }
+}
