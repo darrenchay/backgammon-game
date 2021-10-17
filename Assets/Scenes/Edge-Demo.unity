@@ -2269,7 +2269,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2091141182546773731}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: setupDefaultPiecePositions
+        m_MethodName: SetupDefaultPiecePositions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5473,7 +5473,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2091141182546773731}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: movePiece
+        m_MethodName: MovePiece
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6368,7 +6368,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2091141182546773731}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: addPieceToEdge
+        m_MethodName: AddPieceToEdge
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7302,7 +7302,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2091141182546773731}
         m_TargetAssemblyTypeName: BoardController, Assembly-CSharp
-        m_MethodName: addPieceToEdge
+        m_MethodName: AddPieceToEdge
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

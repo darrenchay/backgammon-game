@@ -46,27 +46,27 @@ public class BoardController : MonoBehaviour
         //Creating top right corner
         for (int i = 0; i < 6; i++)
         {
-            edges[i] = createEdge(i * 0.72f - 3.8f, -2.5f, 0f, i);
+            edges[i] = CreateEdge(i * 0.72f - 3.8f, -2.5f, 0f, i);
         }
         //Creating top left corner (i + 1 skips the middle bar between sides)
         for (int i = 6; i < 12; i++)
         {
-            edges[i] = createEdge((i + 1) * 0.72f - 3.8f, -2.5f, 0f, i);
+            edges[i] = CreateEdge((i + 1) * 0.72f - 3.8f, -2.5f, 0f, i);
         }
         //Creating bottom right corner (j + 1 skips the middle bar between sides)
         for (int j = 6; j < 12; j++)
         {
-            edges[j + 12] = createEdge((-1 * (j + 1)) * 0.72f + 4.85f, 2f, 180f, j + 12);
+            edges[j + 12] = CreateEdge((-1 * (j + 1)) * 0.72f + 4.85f, 2f, 180f, j + 12);
         }
         //Creating bottom left corner (needs to be rotated 180 degrees)
         for (int j = 0; j < 6; j++)
         {
-            edges[j + 12] = createEdge((-1 * j) * 0.72f + 4.8f, 2f, 180f, j + 12);
+            edges[j + 12] = CreateEdge((-1 * j) * 0.72f + 4.8f, 2f, 180f, j + 12);
         }
 
         //Creating Born Off "edges"
-        edges[24] = createEdge(-5f, -2.5f, 180f, 24);
-        edges[25] = createEdge(-5f, 2f, 0f, 25);
+        edges[24] = CreateEdge(-5f, -2.5f, 180f, 24);
+        edges[25] = CreateEdge(-5f, 2f, 0f, 25);
 
 
     }
@@ -80,37 +80,37 @@ public class BoardController : MonoBehaviour
         }
 
         // place white pieces
-        edges[0].GetComponent<Edge>().pushPiece("white");
-        edges[0].GetComponent<Edge>().pushPiece("white");
-        edges[11].GetComponent<Edge>().pushPiece("white");
-        edges[11].GetComponent<Edge>().pushPiece("white");
-        edges[11].GetComponent<Edge>().pushPiece("white");
-        edges[11].GetComponent<Edge>().pushPiece("white");
-        edges[11].GetComponent<Edge>().pushPiece("white");
-        edges[16].GetComponent<Edge>().pushPiece("white");
-        edges[16].GetComponent<Edge>().pushPiece("white");
-        edges[16].GetComponent<Edge>().pushPiece("white");
-        edges[18].GetComponent<Edge>().pushPiece("white");
-        edges[18].GetComponent<Edge>().pushPiece("white");
-        edges[18].GetComponent<Edge>().pushPiece("white");
-        edges[18].GetComponent<Edge>().pushPiece("white");
-        edges[18].GetComponent<Edge>().pushPiece("white");
+        edges[0].GetComponent<Edge>().PushPiece("white");
+        edges[0].GetComponent<Edge>().PushPiece("white");
+        edges[11].GetComponent<Edge>().PushPiece("white");
+        edges[11].GetComponent<Edge>().PushPiece("white");
+        edges[11].GetComponent<Edge>().PushPiece("white");
+        edges[11].GetComponent<Edge>().PushPiece("white");
+        edges[11].GetComponent<Edge>().PushPiece("white");
+        edges[16].GetComponent<Edge>().PushPiece("white");
+        edges[16].GetComponent<Edge>().PushPiece("white");
+        edges[16].GetComponent<Edge>().PushPiece("white");
+        edges[18].GetComponent<Edge>().PushPiece("white");
+        edges[18].GetComponent<Edge>().PushPiece("white");
+        edges[18].GetComponent<Edge>().PushPiece("white");
+        edges[18].GetComponent<Edge>().PushPiece("white");
+        edges[18].GetComponent<Edge>().PushPiece("white");
 
-        edges[5].GetComponent<Edge>().pushPiece("red");
-        edges[5].GetComponent<Edge>().pushPiece("red");
-        edges[5].GetComponent<Edge>().pushPiece("red");
-        edges[5].GetComponent<Edge>().pushPiece("red");
-        edges[5].GetComponent<Edge>().pushPiece("red");
-        edges[7].GetComponent<Edge>().pushPiece("red");
-        edges[7].GetComponent<Edge>().pushPiece("red");
-        edges[7].GetComponent<Edge>().pushPiece("red");
-        edges[12].GetComponent<Edge>().pushPiece("red");
-        edges[12].GetComponent<Edge>().pushPiece("red");
-        edges[12].GetComponent<Edge>().pushPiece("red");
-        edges[12].GetComponent<Edge>().pushPiece("red");
-        edges[12].GetComponent<Edge>().pushPiece("red");
-        edges[23].GetComponent<Edge>().pushPiece("red");
-        edges[23].GetComponent<Edge>().pushPiece("red");
+        edges[5].GetComponent<Edge>().PushPiece("red");
+        edges[5].GetComponent<Edge>().PushPiece("red");
+        edges[5].GetComponent<Edge>().PushPiece("red");
+        edges[5].GetComponent<Edge>().PushPiece("red");
+        edges[5].GetComponent<Edge>().PushPiece("red");
+        edges[7].GetComponent<Edge>().PushPiece("red");
+        edges[7].GetComponent<Edge>().PushPiece("red");
+        edges[7].GetComponent<Edge>().PushPiece("red");
+        edges[12].GetComponent<Edge>().PushPiece("red");
+        edges[12].GetComponent<Edge>().PushPiece("red");
+        edges[12].GetComponent<Edge>().PushPiece("red");
+        edges[12].GetComponent<Edge>().PushPiece("red");
+        edges[12].GetComponent<Edge>().PushPiece("red");
+        edges[23].GetComponent<Edge>().PushPiece("red");
+        edges[23].GetComponent<Edge>().PushPiece("red");
     }
 
     // Update is called once per frame
@@ -171,19 +171,19 @@ public class BoardController : MonoBehaviour
     }
 
     //Creates a new piece and adds it to the edge taken from user input
-    public void addPieceToEdge(string color)
+    public void AddPieceToEdge(string color)
     {
         int number;
         //Making sure the input is an int and in range
         if (int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
         {
             //Creating and pushing a piece of color "color" to the users stack (edge)
-            edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().pushPiece(color);
+            edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().PushPiece(color);
         }
     }
 
     //Creates an edge (visible for demo)
-    private GameObject createEdge(float x, float y, float rotation, int i)
+    private GameObject CreateEdge(float x, float y, float rotation, int i)
     {
         //Creating empty cube and changing position, scale, and rotation (for the bottom half of board)
         GameObject edge = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -208,7 +208,7 @@ public class BoardController : MonoBehaviour
      * to: toText
      * from: fromText
      * **/
-    public void movePiece()
+    public void MovePiece()
     {
         int to;
         int from;
@@ -221,13 +221,13 @@ public class BoardController : MonoBehaviour
                 if (edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().getStackSize() < 30)
                 {
                     //Poping piece from the "from" stack
-                    GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().popPiece();
+                    GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().PopPiece();
 
                     //Making sure the stack is not empty
                     if (piece != null)
                     {
                         //Pushing piece to new stack
-                        edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().pushPiece(piece.GetComponent<Piece>().getColor());
+                        edges[int.Parse(toText.text.ToString())].GetComponent<Edge>().PushPiece(piece.GetComponent<Piece>().getColor());
                     }
                 }
             }

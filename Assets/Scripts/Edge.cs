@@ -23,7 +23,7 @@ public class Edge : MonoBehaviour
     }
 
     //Used to create a piece
-    private GameObject createPiece(string color)
+    private GameObject CreatePiece(string color)
     {
         GameObject piece = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         piece.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
@@ -36,7 +36,7 @@ public class Edge : MonoBehaviour
     }
 
     //Pushes a new piece to the stack based on the color
-    public void pushPiece(string color)
+    public void PushPiece(string color)
     {
         //Making sure stack is not full (max number of backgammon pieces)
         if (this.pieces.Count == 30)
@@ -55,14 +55,14 @@ public class Edge : MonoBehaviour
         }
 
         //Creating piece
-        GameObject piece = createPiece(color);
+        GameObject piece = CreatePiece(color);
 
         //Pusing piece
         this.pieces.Push(piece);
     }
 
     //Pops the stack and destroys the piece to be copied to another stack
-    public GameObject popPiece()
+    public GameObject PopPiece()
     {
         //If the stack is empty return null
         if (this.pieces.Count == 0)
