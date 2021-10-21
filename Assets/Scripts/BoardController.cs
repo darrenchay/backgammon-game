@@ -29,8 +29,8 @@ public class BoardController : MonoBehaviour
     public GameObject redBornCount;
     public GameObject whiteBornCount;
 
-    //Number of edges total + born off slots = 24 + 2 = 26
-    private int edgeCount = 26;
+    //Number of edges total + born off slots + bar = 24 + 2 + 1 = 27
+    private int edgeCount = 27;
 
     //Array of edges, each holding a stack
     private GameObject[] edges;
@@ -67,6 +67,9 @@ public class BoardController : MonoBehaviour
         //Creating Born Off "edges"
         edges[24] = CreateEdge(-5f, -2.5f, 180f, 24);
         edges[25] = CreateEdge(-5f, 2f, 0f, 25);
+
+        //Creating Bar
+        edges[26] = CreateEdge((-1 * (6)) * 0.72f + 4.85f, 0f, 0f, 26);
 
 
     }
