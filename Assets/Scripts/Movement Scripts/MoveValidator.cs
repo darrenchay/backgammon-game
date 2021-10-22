@@ -19,10 +19,10 @@ public class MoveValidator : MonoBehaviour
         //Allowing only forward movement based on the turn
         if (whitesTurn)
         {
-            searchValue = from - to;
+            searchValue = to - from;
         }
         else {
-            searchValue = to - from;
+            searchValue = from - to;
         }
 
         //No going backwards
