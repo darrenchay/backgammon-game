@@ -31,8 +31,10 @@ public class Edge : MonoBehaviour
         piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
         piece.AddComponent<Piece>();
         piece.GetComponent<Piece>().SetColor(color);
+        //Removing collider so dice pass through
+        piece.GetComponent<CapsuleCollider>().enabled = false;
         //So that the pieces dont get hit with a raycast (clicking for movement)
-        piece.layer = 2;
+        piece.layer =2;
 
         return piece;
     }
