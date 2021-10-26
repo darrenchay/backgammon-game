@@ -174,7 +174,13 @@ public class MovementManager : MonoBehaviour
         completeRoll[0] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice1Num();
         completeRoll[1] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice2Num();
 
-        //*JAMES: double logic should be able to go here by setting the last two elements
+        // check for double roll
+        if (completeRoll[0] == completeRoll[1])
+        {
+            var val = completeRoll[0];
+            completeRoll[2] = val;
+            completeRoll[3] = val;
+        }
 
         //Checking if there are no valid moves
         //Writing here means a single check of the more intense computation
