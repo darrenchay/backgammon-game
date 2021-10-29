@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
  * Used to control the board
  * **/
 
-
 public class BoardController : MonoBehaviour
 {
+
     //Text and input used for demo
     public Text countText;
     public Text fromText;
@@ -35,9 +35,13 @@ public class BoardController : MonoBehaviour
     //Array of edges, each holding a stack
     private GameObject[] edges;
 
+    private bool whitesTurn;
+
     // Start is called before the first frame update
     void Start()
     {
+        whitesTurn = true;
+
         //Initializing edges (24 edges per backgammon table and 2 born off spaces)
         edges = new GameObject[edgeCount];
 
@@ -191,7 +195,7 @@ public class BoardController : MonoBehaviour
         //Creating empty cube and changing position, scale, and rotation (for the bottom half of board)
         GameObject edge = GameObject.CreatePrimitive(PrimitiveType.Cube);
         edge.transform.position = new Vector3(x, 0, y);
-        edge.transform.localScale = new Vector3(0.1f, 0.1f, 2f);
+        edge.transform.localScale = new Vector3(0.4f, 0.1f, 2f);
         edge.transform.Rotate(0.0f, rotation, 0.0f, Space.World);
 
         //Making the edge a child of the board
@@ -206,6 +210,7 @@ public class BoardController : MonoBehaviour
 
         return edge;
     }
+
 
     /**Moves a piece from user input to user input stack
      * to: toText
@@ -235,6 +240,101 @@ public class BoardController : MonoBehaviour
                 }
             }
         }
+    }
+
+    /**Moves a piece from dice roll to user input stack
+     * to: toText
+     * from: fromText
+     * **/
+    public void MovePiece(int from, int to)
+    {
+        if (to >= 0 && to < edgeCount)
+        {
+            //If the input is properly formatted
+            if (from >= 0 && from < edgeCount && from != to)
+            {
+                //Making sure the stack to be put onto is not full (so we do not take from but not add to)
+                if (edges[to].GetComponent<Edge>().GetStackSize() < 30)
+                {
+                    //Poping piece from the "from" stack
+                    GameObject piece = edges[from].GetComponent<Edge>().PopPiece();
+
+                    //Making sure the stack is not empty
+                    if (piece != null)
+                    {
+                        //Pushing piece to new stack
+                        edges[to].GetComponent<Edge>().PushPiece(piece.GetComponent<Piece>().GetColor());
+                    }
+                }
+            }
+        }
+    }
+
+    //Gets whos turn it is
+    public bool GetWhitesTurn() {
+        return this.whitesTurn;
+    }
+
+    //Returns the top color of a certain stack
+    public string GetTopColorOnEdge(int edgeIndex) {
+
+        //Checking that the stack is not empty
+        if (this.edges[edgeIndex].GetComponent<Edge>().GetStackSize() == 0) {
+            return "";
+        }
+
+        //Peeking the stack
+        GameObject tmp = this.edges[edgeIndex].GetComponent<Edge>().Peek();
+        
+        //returning the color
+        return tmp.GetComponent<Piece>().GetColor();
+    }
+
+    //Tints the top piece of a stack to show the user selected it
+    public void SelectTopPiece(int edgeIndex) {
+        //Making sure the stack is not empty (we have a piece to select)
+        if (this.edges[edgeIndex].GetComponent<Edge>().GetStackSize() == 0)
+        {
+            return;
+        }
+        GameObject tmp = this.edges[edgeIndex].GetComponent<Edge>().Peek();
+
+        if (tmp.GetComponent<Piece>().GetColor() == "white")
+        {
+            tmp.GetComponent<Renderer>().material.color = new Color(200f / 255f, 200f / 255f, 200f / 255f); 
+        }
+        else if (tmp.GetComponent<Piece>().GetColor() == "red")
+        {
+            tmp.GetComponent<Renderer>().material.color = new Color(200f / 255f, 0f, 0f);
+        }
+    }
+
+    //Untints the top piece of a stack to show the user deselected it
+    public void DeselectTopPiece(int edgeIndex) {
+        //Making sure the stack is not empty (we have a piece to deselect)
+        if (this.edges[edgeIndex].GetComponent<Edge>().GetStackSize() == 0)
+        {
+            return;
+        }
+        GameObject tmp = this.edges[edgeIndex].GetComponent<Edge>().Peek();
+
+        if (tmp.GetComponent<Piece>().GetColor() == "white") {
+            tmp.GetComponent<Renderer>().material.color = Color.white;
+        } else if (tmp.GetComponent<Piece>().GetColor() == "red")
+         {
+            tmp.GetComponent<Renderer>().material.color = Color.red;
+         }
+    }
+
+    //Making it whites turn
+    public void WhitesTurn() {
+        this.whitesTurn = true;
+    }
+
+    //Making it reds turn
+    public void RedsTurn()
+    {
+        this.whitesTurn = false;
     }
 
 }

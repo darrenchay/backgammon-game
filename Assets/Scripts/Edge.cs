@@ -31,6 +31,8 @@ public class Edge : MonoBehaviour
         piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
         piece.AddComponent<Piece>();
         piece.GetComponent<Piece>().SetColor(color);
+        //So that the pieces dont get hit with a raycast (clicking for movement)
+        piece.layer = 2;
 
         return piece;
     }
@@ -59,6 +61,10 @@ public class Edge : MonoBehaviour
 
         //Pusing piece
         this.pieces.Push(piece);
+    }
+
+    public GameObject Peek() {
+        return this.pieces.Peek();
     }
 
     //Pops the stack and destroys the piece to be copied to another stack
