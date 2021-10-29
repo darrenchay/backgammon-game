@@ -79,6 +79,19 @@ public class MovementManager : MonoBehaviour
                     int movementTo = int.Parse(hit.transform.name.Substring(5));
                     if (this.gameObject.GetComponent<MoveValidator>().IsValidTo(completeRoll, allowMovementFrom, movementTo))
                     {
+
+                        //Check if edge only contains other player color and seeing if a piece needs to be added to the bar
+                        if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(movementTo) == 1)
+                        {
+                            //Move top piece to the bar
+                            this.gameObject.GetComponent<BoardController>().MovePiece(movementTo, 26);
+                        }
+                        else if (!this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(movementTo) == 1)
+                        {
+                            //Move top piece to the bar
+                            this.gameObject.GetComponent<BoardController>().MovePiece(movementTo, 26);
+                        }
+
                         //Move piece and deselect
                         this.gameObject.GetComponent<BoardController>().MovePiece(allowMovementFrom, movementTo);
                         this.gameObject.GetComponent<BoardController>().DeselectTopPiece(movementTo);
@@ -88,6 +101,14 @@ public class MovementManager : MonoBehaviour
                         {
                             SearchAndDestroyGreaterRoll(Mathf.Abs((-1) - allowMovementFrom));
                         }
+                        else if (allowMovementFrom == 26 && this.gameObject.GetComponent<BoardController>().GetWhitesTurn()) 
+                        {
+                            SearchAndDestroyRoll(Mathf.Abs(movementTo - (-1)));
+                        } 
+                        else if (allowMovementFrom == 26 && !this.gameObject.GetComponent<BoardController>().GetWhitesTurn()) 
+                        {
+                            SearchAndDestroyRoll(Mathf.Abs(movementTo - (24)));
+                        }
                         else if (movementTo == 25)
                         {
                             SearchAndDestroyGreaterRoll(Mathf.Abs((24) - allowMovementFrom));
@@ -95,7 +116,6 @@ public class MovementManager : MonoBehaviour
                         else {
                             SearchAndDestroyRoll(Mathf.Abs(movementTo - allowMovementFrom));
                         }
-                        //ADD BAR CONDITION HERE (DESTROY MOVE FROM BAR)
 
                         //Changing turns if the user is out of moves or user cannot move anymore
                         if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn())

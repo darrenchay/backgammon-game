@@ -138,14 +138,12 @@ public class MoveValidator : MonoBehaviour
         }
 
         //Check if edge only contains other player color
-        if (whitesTurn && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(to) == 1 && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(to) == 0)
+        if (whitesTurn && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(to) == 1)
         {
-            //TODO: MOVE PIECE TOP BAR HERE
             return true;
         }
-        if (!whitesTurn && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(to) == 1 && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(to) == 0)
+        else if (!whitesTurn && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(to) == 1)
         {
-            //TODO: MOVE PIECE TOP BAR HERE
             return true;
         }
 
