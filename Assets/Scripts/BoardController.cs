@@ -270,6 +270,21 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    public int GetEdgeRedCount(int edgeIndex) {
+        return this.edges[edgeIndex].GetComponent<Edge>().GetRedCount();
+    }
+
+    public int GetEdgeWhiteCount(int edgeIndex)
+    {
+        return this.edges[edgeIndex].GetComponent<Edge>().GetWhiteCount();
+
+    }
+
+    public int GetEdgeStackSize(int edgeIndex)
+    {
+        return this.edges[edgeIndex].GetComponent<Edge>().GetStackSize();
+    }
+
     //Gets whos turn it is
     public bool GetWhitesTurn() {
         return this.whitesTurn;
@@ -335,6 +350,11 @@ public class BoardController : MonoBehaviour
     public void RedsTurn()
     {
         this.whitesTurn = false;
+    }
+
+    //Switches the turn
+    public void ToggleTurn() {
+        this.whitesTurn = !this.whitesTurn;
     }
 
 }

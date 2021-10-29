@@ -18,7 +18,10 @@ public class DropDice : MonoBehaviour
     public GameObject diceFaceChecker;
     
     //Drops the dice from above
-    public void dropDice() {
+    public void Roll() {
+
+        //If frozen unfreeze
+        UnfreezDice();
 
         //Set that the dice are not touching the board
         diceFaceChecker.GetComponent<DiceFaceCheck>().SetIsTouchingBoard(false);
@@ -46,5 +49,24 @@ public class DropDice : MonoBehaviour
     public void ShowDice() {
         dice1.SetActive(true);
         dice2.SetActive(true);
+    }
+
+    //Freezes the dice movement
+    public void FreezeDice() {
+        Rigidbody rb1 = dice1.GetComponent<Rigidbody>();
+        Rigidbody rb2 = dice2.GetComponent<Rigidbody>();
+        rb1.velocity = Vector3.zero;
+        rb1.isKinematic = true;
+        rb2.velocity = Vector3.zero;
+        rb2.isKinematic = true;
+    }
+
+    //Unfreezes the dice movement
+    public void UnfreezDice()
+    {
+        Rigidbody rb1 = dice1.GetComponent<Rigidbody>();
+        Rigidbody rb2 = dice2.GetComponent<Rigidbody>();
+        rb1.isKinematic = false;
+        rb2.isKinematic = false;
     }
 }

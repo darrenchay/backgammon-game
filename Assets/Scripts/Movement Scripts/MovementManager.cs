@@ -16,6 +16,9 @@ public class MovementManager : MonoBehaviour
     //Dice face checker used to get dice values
     public GameObject diceFaceChecker;
 
+    //The dice spawn gameobject so we can force the dice there
+    public GameObject dropDiceLocation;
+
     //Determines if it is a new roll
     private bool newRoll;
 
@@ -79,15 +82,34 @@ public class MovementManager : MonoBehaviour
                         //Move piece and deselect
                         this.gameObject.GetComponent<BoardController>().MovePiece(allowMovementFrom, movementTo);
                         this.gameObject.GetComponent<BoardController>().DeselectTopPiece(movementTo);
-                    
-                        //Destroy the dice move
-                        SearchAndDestroyRoll(Mathf.Abs(movementTo - allowMovementFrom));
 
-                        //Changing turns if the user is out of moves
+                        //Destroy the dice move (first greates value if baring off)
+                        if (movementTo == 24)
+                        {
+                            SearchAndDestroyGreaterRoll(Mathf.Abs((-1) - allowMovementFrom));
+                        }
+                        else if (movementTo == 25)
+                        {
+                            SearchAndDestroyGreaterRoll(Mathf.Abs((24) - allowMovementFrom));
+                        }
+                        else {
+                            SearchAndDestroyRoll(Mathf.Abs(movementTo - allowMovementFrom));
+                        }
+                        //ADD BAR CONDITION HERE (DESTROY MOVE FROM BAR)
+
+                        //Changing turns if the user is out of moves or user cannot move anymore
                         if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn())
                         {
-                            if (UsedAllMoves()) {
+                            if (UsedAllMoves())
+                            {
                                 this.gameObject.GetComponent<BoardController>().RedsTurn();
+                            }
+                            else {
+                                //Checking if user can still make a move
+                                if (!this.gameObject.GetComponent<MoveValidator>().ValidMoveExists(completeRoll))
+                                {
+                                    ResetAndSwitchTurns();
+                                }
                             }
                         }
                         else {
@@ -95,7 +117,15 @@ public class MovementManager : MonoBehaviour
                             {
                                 this.gameObject.GetComponent<BoardController>().WhitesTurn();
                             }
+                            else {
+                                //Checking if user can still make a move
+                                if (!this.gameObject.GetComponent<MoveValidator>().ValidMoveExists(completeRoll))
+                                {
+                                    ResetAndSwitchTurns();
+                                }
+                            }
                         }
+
                         //reset
                         allowMovementFrom = -1;
                     }
@@ -124,7 +154,10 @@ public class MovementManager : MonoBehaviour
                     //Staring coroutine in order to wait for the dice to settle
                     StartCoroutine("UpdateDiceRolls");
                 }
-
+            }
+            else {
+                //If in the air there should always be no roll values
+                completeRoll = new int[4] { -1, -1, -1, -1 };
             }
         }
 
@@ -141,16 +174,58 @@ public class MovementManager : MonoBehaviour
         completeRoll[0] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice1Num();
         completeRoll[1] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice2Num();
 
-        //*JAMES: double logic should be able to go here by setting the last two elements
+        // check for double roll
+        if (completeRoll[0] == completeRoll[1])
+        {
+            var val = completeRoll[0];
+            completeRoll[2] = val;
+            completeRoll[3] = val;
+        }
 
-        //It is no longer a new roll
-        newRoll = false;
+        //Checking if there are no valid moves
+        //Writing here means a single check of the more intense computation
+
+        if (!this.gameObject.GetComponent<MoveValidator>().ValidMoveExists(completeRoll))
+        {
+            ResetAndSwitchTurns();
+        }
+        else {
+            //It is no longer a new roll
+            newRoll = false;
+        }
+
+    }
+
+    //Resets values and switches turns
+    private void ResetAndSwitchTurns() {
+
+        newRoll = true;
+        completeRoll = new int[4] { -1, -1, -1, -1 };
+
+        dropDiceLocation.GetComponent<DropDice>().Roll();
+        dropDiceLocation.GetComponent<DropDice>().HideDice();
+        dropDiceLocation.GetComponent<DropDice>().FreezeDice();
+
+        this.gameObject.GetComponent<BoardController>().ToggleTurn();
     }
 
     //Destroy the first instance of the find value
     private void SearchAndDestroyRoll(int find) { 
         for (int i = 0; i < 4; i++) {
             if (this.completeRoll[i] == find) {
+                this.completeRoll[i] = -1;
+                return;
+            }
+        }
+    }
+
+    //Destroy the first instance greater then or equal to the find value
+    private void SearchAndDestroyGreaterRoll(int find)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (this.completeRoll[i] >= find)
+            {
                 this.completeRoll[i] = -1;
                 return;
             }
