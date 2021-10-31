@@ -194,6 +194,9 @@ public class MovementManager : MonoBehaviour
         completeRoll[0] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice1Num();
         completeRoll[1] = diceFaceChecker.GetComponent<DiceFaceCheck>().GetDice2Num();
 
+        //Hide dice after roll
+        dropDiceLocation.GetComponent<DropDice>().HideDice();
+
         // check for double roll
         if (completeRoll[0] == completeRoll[1])
         {
@@ -267,5 +270,9 @@ public class MovementManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public int[] GetCompleteRoll() {
+        return this.completeRoll;
     }
 }
