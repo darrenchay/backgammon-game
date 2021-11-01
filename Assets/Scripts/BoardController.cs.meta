@@ -3,7 +3,18 @@ guid: 197fe7724d2a5a64fbc6602fd9974b3d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - countText: {instanceID: 0}
+  - fromText: {instanceID: 0}
+  - toText: {instanceID: 0}
+  - edgeIndex: {instanceID: 0}
+  - edgeNumbers: {instanceID: 0}
+  - winScreen: {instanceID: 0}
+  - winSymbol: {instanceID: 0}
+  - gameUI: {instanceID: 0}
+  - winText: {instanceID: 0}
+  - redBornCount: {instanceID: 0}
+  - whiteBornCount: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
