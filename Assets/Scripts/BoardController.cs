@@ -25,6 +25,10 @@ public class BoardController : MonoBehaviour
     public GameObject gameUI;
     public Text winText;
 
+    //Turn UI
+    public GameObject turnSymbol;
+    public Text turnText;
+
     //Counter text for born off areas
     public GameObject redBornCount;
     public GameObject whiteBornCount;
@@ -123,6 +127,15 @@ public class BoardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (whitesTurn)
+        {
+            turnSymbol.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            turnText.text = "White is currently playing...";
+        } else
+        {
+            turnSymbol.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            turnText.text = "Red is currently playing...";
+        }
         //Updating the pice counter for the demo
         int number;
         if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
