@@ -86,15 +86,20 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    //Checking if all red pieces are home 
-                    if(IsAllHome("red"))
+                    //Get all top pieces of the players turn
+                    List<int> possibleFrom = new List<int>();
+
+                    //Getting all top pieces
+                    for (int i = 0; i < 24; i++)
                     {
-                        return true;
-                    } 
-                    else 
-                    {
-                        return false;
+                        if (this.gameObject.GetComponent<BoardController>().GetTopColorOnEdge(i) == "red")
+                        {
+                            possibleFrom.Add(i);
+                        }
                     }
+
+                    //Checking if all red pieces are home 
+                    return CheckHome(possibleFrom, "red");
 
                 }
             }
@@ -116,15 +121,20 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    //Checking if all white pieces are home 
-                    if (IsAllHome("white"))
+                    //Get all top pieces of the players turn
+                    List<int> possibleFrom = new List<int>();
+
+                    //Getting all top pieces
+                    for (int i = 0; i < 24; i++)
                     {
-                        return true;
+                        if (this.gameObject.GetComponent<BoardController>().GetTopColorOnEdge(i) == "white")
+                        {
+                            possibleFrom.Add(i);
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+
+                    //Checking if all red pieces are home 
+                    return CheckHome(possibleFrom, "white");
                 }
             }
         }
@@ -331,33 +341,4 @@ public class MoveValidator : MonoBehaviour
         }
         return false;
     }
-
-    //Checks whether all pieces are in home 
-    private bool IsAllHome(string playerColor)
-    {
-        int totalPieces = 0;
-        if(playerColor == "red")
-        {
-            for(int i = 0; i < 6; i++)
-            {
-                totalPieces += this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(i);
-            }
-        }
-        else
-        {
-            for (int i = 18; i < 24; i++)
-            {
-                totalPieces += this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(i);
-            }
-        }
-        if (totalPieces == 15)
-        {
-            return true;
-        } 
-        else
-        {
-            return false;
-        }
-    }
-
 }
