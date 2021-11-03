@@ -219,6 +219,19 @@ public class MovementManager : MonoBehaviour
 
     }
 
+    //Checks the dice roll values to determine who plays first
+    public void CheckRollForTurn()
+    {
+        if (completeRoll[0] > completeRoll[1]) this.gameObject.GetComponent<BoardController>().WhitesTurn();
+        else if (completeRoll[0] < completeRoll[1]) this.gameObject.GetComponent<BoardController>().RedsTurn();
+        //If values are the same, reset and re-roll the dice
+        //TODO - There are some scenarios where this triggers when the dice rolls are reset to -1. Those bugs should probably be fixed to determine if this requires addressing
+        else
+        {
+            dropDiceLocation.GetComponent<DropDice>().Roll();
+        }
+    }
+
     //Resets values and switches turns
     private void ResetAndSwitchTurns() {
 
