@@ -86,7 +86,16 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    return true;
+                    //Checking if all red pieces are home 
+                    if(IsAllHome("red"))
+                    {
+                        return true;
+                    } 
+                    else 
+                    {
+                        return false;
+                    }
+
                 }
             }
             else if (to == 25)
@@ -107,7 +116,15 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    return true;
+                    //Checking if all white pieces are home 
+                    if (IsAllHome("white"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
@@ -206,7 +223,7 @@ public class MoveValidator : MonoBehaviour
 
     }
 
-    //Determines if a vlid move exists based on the current board and the users roll
+    //Determines if a valid move exists based on the current board and the users roll
     public bool ValidMoveExists(int[] rolls) {
         bool whitesTurn = this.gameObject.GetComponent<BoardController>().GetWhitesTurn();
         string playerColor;
@@ -274,7 +291,7 @@ public class MoveValidator : MonoBehaviour
                 if (i < 18)
                 {
                     return false;
-                }
+                } 
             }
         }
         else
@@ -313,6 +330,34 @@ public class MoveValidator : MonoBehaviour
             }
         }
         return false;
+    }
+
+    //Checks whether all pieces are in home 
+    private bool IsAllHome(string playerColor)
+    {
+        int totalPieces = 0;
+        if(playerColor == "red")
+        {
+            for(int i = 0; i < 6; i++)
+            {
+                totalPieces += this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(i);
+            }
+        }
+        else
+        {
+            for (int i = 18; i < 24; i++)
+            {
+                totalPieces += this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(i);
+            }
+        }
+        if (totalPieces == 15)
+        {
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
     }
 
 }
