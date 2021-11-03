@@ -301,7 +301,7 @@ public class MoveValidator : MonoBehaviour
                 if (i < 18)
                 {
                     return false;
-                } 
+                }
             }
         }
         else
