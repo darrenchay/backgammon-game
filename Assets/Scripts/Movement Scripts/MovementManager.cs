@@ -80,8 +80,20 @@ public class MovementManager : MonoBehaviour
                     if (this.gameObject.GetComponent<MoveValidator>().IsValidTo(completeRoll, allowMovementFrom, movementTo))
                     {
 
+                        //To check if we have a swap in order to skip a double move
+                        bool swapOccured = false;
+
+                        //We need to check if we swap and not move and unmove (BUG FIX)
+                        if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(movementTo) == 1 && allowMovementFrom == 26)
+                        {
+                            this.gameObject.GetComponent<BoardController>().SwapPiece(movementTo, 26);
+                            swapOccured = true;
+                        }
+                        else if (!this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(movementTo) == 1 && allowMovementFrom == 26) {
+                            this.gameObject.GetComponent<BoardController>().SwapPiece(movementTo, 26);
+                        }
                         //Check if edge only contains other player color and seeing if a piece needs to be added to the bar
-                        if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(movementTo) == 1)
+                        else if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(movementTo) == 1)
                         {
                             //Move top piece to the bar
                             this.gameObject.GetComponent<BoardController>().MovePiece(movementTo, 26);
@@ -92,9 +104,12 @@ public class MovementManager : MonoBehaviour
                             this.gameObject.GetComponent<BoardController>().MovePiece(movementTo, 26);
                         }
 
-                        //Move piece and deselect
-                        this.gameObject.GetComponent<BoardController>().MovePiece(allowMovementFrom, movementTo);
-                        this.gameObject.GetComponent<BoardController>().DeselectTopPiece(movementTo);
+                        if (!swapOccured)
+                        {
+                            //Move piece and deselect
+                            this.gameObject.GetComponent<BoardController>().MovePiece(allowMovementFrom, movementTo);
+                            this.gameObject.GetComponent<BoardController>().DeselectTopPiece(movementTo);
+                        }
 
                         //Destroy the dice move (first greates value if baring off)
                         if (movementTo == 24)
