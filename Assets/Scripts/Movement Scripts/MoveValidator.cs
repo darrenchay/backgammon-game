@@ -86,7 +86,21 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    return true;
+                    //Get all top pieces of the players turn
+                    List<int> possibleFrom = new List<int>();
+
+                    //Getting all top pieces
+                    for (int i = 0; i < 24; i++)
+                    {
+                        if (this.gameObject.GetComponent<BoardController>().GetTopColorOnEdge(i) == "red")
+                        {
+                            possibleFrom.Add(i);
+                        }
+                    }
+
+                    //Checking if all red pieces are home 
+                    return CheckHome(possibleFrom, "red");
+
                 }
             }
             else if (to == 25)
@@ -107,7 +121,20 @@ public class MoveValidator : MonoBehaviour
                 //Making sure the dice roll exists (equal to or greater than)
                 if (SearchEdgeBaring(searchValue, rolls))
                 {
-                    return true;
+                    //Get all top pieces of the players turn
+                    List<int> possibleFrom = new List<int>();
+
+                    //Getting all top pieces
+                    for (int i = 0; i < 24; i++)
+                    {
+                        if (this.gameObject.GetComponent<BoardController>().GetTopColorOnEdge(i) == "white")
+                        {
+                            possibleFrom.Add(i);
+                        }
+                    }
+
+                    //Checking if all red pieces are home 
+                    return CheckHome(possibleFrom, "white");
                 }
             }
         }
@@ -206,7 +233,7 @@ public class MoveValidator : MonoBehaviour
 
     }
 
-    //Determines if a vlid move exists based on the current board and the users roll
+    //Determines if a valid move exists based on the current board and the users roll
     public bool ValidMoveExists(int[] rolls) {
         bool whitesTurn = this.gameObject.GetComponent<BoardController>().GetWhitesTurn();
         string playerColor;
@@ -314,5 +341,4 @@ public class MoveValidator : MonoBehaviour
         }
         return false;
     }
-
 }
