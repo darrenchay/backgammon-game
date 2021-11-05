@@ -245,6 +245,16 @@ public class MoveValidator : MonoBehaviour
             playerColor = "red";
         }
 
+        //Edge case if the player is below other players piece in the bar
+        if (this.gameObject.GetComponent<BoardController>().GetEdgeStackSize(26) > 0 && this.gameObject.GetComponent<BoardController>().GetTopColorOnEdge(26) != playerColor) {
+            if (playerColor == "white" && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(26) > 0) {
+                return false;
+            } else if (playerColor == "red" && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(26) > 0) {
+                return false;
+            }
+        }
+
+
         //If there is a bar piece for the current user they MUST take it off, so if there is one and there are no valid moves we skip turn
         if (playerColor == "white" && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(26) > 0 || playerColor == "red" && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(26) > 0) {
             return CheckBar(playerColor, rolls);
