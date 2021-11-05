@@ -243,7 +243,6 @@ public class BoardController : MonoBehaviour
                 {
                     //Poping piece from the "from" stack
                     GameObject piece = edges[int.Parse(fromText.text.ToString())].GetComponent<Edge>().PopPiece();
-
                     //Making sure the stack is not empty
                     if (piece != null)
                     {
@@ -282,6 +281,40 @@ public class BoardController : MonoBehaviour
             }
         }
     }
+
+    /**Swaps pieces on 2 stacks
+ * to: toText
+ * from: fromText
+ * **/
+    public void SwapPiece(int from, int to)
+    {
+        if (to >= 0 && to < edgeCount)
+        {
+            //If the input is properly formatted
+            if (from >= 0 && from < edgeCount && from != to)
+            {
+                //Making sure the stack to be put onto is not full (so we do not take from but not add to)
+                if (edges[to].GetComponent<Edge>().GetStackSize() < 30 && edges[from].GetComponent<Edge>().GetStackSize() < 30)
+                {
+                    //Poping piece from the "from" stack
+                    GameObject pieceA = edges[to].GetComponent<Edge>().PopPiece();
+
+                    //Poping piece from the "to" stack
+                    GameObject pieceB = edges[from].GetComponent<Edge>().PopPiece();
+
+                    //Making sure the stack is not empty
+                    if (pieceB != null && pieceA != null)
+                    {
+                        //Pushing piece to new stack
+                        edges[to].GetComponent<Edge>().PushPiece(pieceB.GetComponent<Piece>().GetColor());
+                        //Pushing piece to new stack
+                        edges[from].GetComponent<Edge>().PushPiece(pieceA.GetComponent<Piece>().GetColor());
+                    }
+                }
+            }
+        }
+    }
+
 
     public int GetEdgeRedCount(int edgeIndex) {
         return this.edges[edgeIndex].GetComponent<Edge>().GetRedCount();
