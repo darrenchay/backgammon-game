@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/**
+ * SCENECHANGER 
+ * Used to navigate between the scenes
+ * **/
 public class SceneChanger : MonoBehaviour
 {
 	public void ChangeScene(string sceneName)
