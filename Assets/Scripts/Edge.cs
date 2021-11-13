@@ -28,7 +28,21 @@ public class Edge : MonoBehaviour
         GameObject piece = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         piece.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
         piece.transform.parent = gameObject.transform;
-        piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
+
+        //if on bar
+        if (this.gameObject.name.Substring(5) == "26")
+        {
+            piece.transform.localPosition = new Vector3(0, 2.7f, this.pieces.Count * 0.26f - 0.5f);
+        }
+        //If on born off zones
+        else if (this.gameObject.name.Substring(5) == "25" || this.gameObject.name.Substring(5) == "24")
+        {
+            piece.transform.localPosition = new Vector3(0, 2.5f, this.pieces.Count * 0.26f - 0.5f);
+        }
+        else {
+            piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
+        }
+
         piece.AddComponent<Piece>();
         piece.GetComponent<Piece>().SetColor(color);
         //Removing collider so dice pass through
