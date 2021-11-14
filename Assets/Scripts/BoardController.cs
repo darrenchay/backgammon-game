@@ -41,9 +41,18 @@ public class BoardController : MonoBehaviour
 
     private bool whitesTurn;
 
+    //To determine the current scene
+    private Scene scene;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        //Getting active scene to tell if its demo or real 
+        scene = SceneManager.GetActiveScene();
+
+
         whitesTurn = true;
 
         //Initializing edges (24 edges per backgammon table and 2 born off spaces)
@@ -78,6 +87,10 @@ public class BoardController : MonoBehaviour
 
         //Creating Bar
         edges[26] = CreateEdge((-1 * (6)) * 0.72f + 4.85f, 0f, 0f, 26);
+
+
+
+        SetupDefaultPiecePositions();
 
 
     }
@@ -127,6 +140,7 @@ public class BoardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (whitesTurn)
         {
             turnSymbol.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -137,10 +151,13 @@ public class BoardController : MonoBehaviour
             turnText.text = "Red is currently playing...";
         }
         //Updating the pice counter for the demo
-        int number;
-        if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
+        if (scene.name == "Edge-Demo")
         {
-            countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetWhiteCount() + "";
+            int number;
+            if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
+            {
+                countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetWhiteCount() + "";
+            }
         }
 
         //Updating red and white born off counts
@@ -187,7 +204,7 @@ public class BoardController : MonoBehaviour
     //Restarts the scene
     public void Restart()
     {
-        SceneManager.LoadScene("Edge-Demo");
+        SceneManager.LoadScene(scene.name);
     }
 
     //Creates a new piece and adds it to the edge taken from user input
