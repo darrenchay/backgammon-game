@@ -172,10 +172,14 @@ public class BoardController : MonoBehaviour
             turnText.text = "Red is currently playing...";
         }
         //Updating the pice counter for the demo
-        int number;
-        if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
+
+        if (scene.name == "Edge-Demo")
         {
-            countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetWhiteCount() + "";
+            int number;
+            if (edgeIndex.text.ToString() != "" && int.TryParse(edgeIndex.text.ToString(), out number) && number >= 0 && number < edgeCount)
+            {
+                countText.text = "Edge " + int.Parse(edgeIndex.text.ToString()) + "| R: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetRedCount() + "| W: " + edges[int.Parse(edgeIndex.text.ToString())].GetComponent<Edge>().GetWhiteCount() + "";
+            }
         }
 
         //Updating red and white born off counts
