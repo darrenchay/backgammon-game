@@ -111,6 +111,10 @@ public class BoardController : MonoBehaviour
         //Setting board
         SetupDefaultPiecePositions();
 
+
+        SetupDefaultPiecePositions();
+
+
     }
 
     public void SetupDefaultPiecePositions()
@@ -309,7 +313,7 @@ public class BoardController : MonoBehaviour
     //Restarts the scene
     public void Restart()
     {
-        SceneManager.LoadScene("Edge-Demo");
+        SceneManager.LoadScene(scene.name);
     }
 
     //Creates a new piece and adds it to the edge taken from user input

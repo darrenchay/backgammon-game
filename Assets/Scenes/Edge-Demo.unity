@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465767, g: 0.4964121, b: 0.57481635, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657642, g: 0.49641174, b: 0.57481545, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6152,6 +6152,10 @@ MonoBehaviour:
   diceFaceChecker: {fileID: 552020894}
   dropDiceLocation: {fileID: 1236202864}
   rollsArray: {fileID: 1150433475}
+  rollText: {fileID: 0}
+  turnPrompt: {fileID: 1106795737}
+  diceRollVisual: {fileID: 1103563789}
+  concede: {fileID: 0}
 --- !u!114 &2091141182546773733
 MonoBehaviour:
   m_ObjectHideFlags: 0
