@@ -39,7 +39,8 @@ public class Edge : MonoBehaviour
         {
             piece.transform.localPosition = new Vector3(0, 2.5f, this.pieces.Count * 0.26f - 0.5f);
         }
-        else {
+        else
+        {
             piece.transform.localPosition = new Vector3(0, 0.5f, this.pieces.Count * 0.26f - 0.5f);
         }
 
@@ -48,7 +49,7 @@ public class Edge : MonoBehaviour
         //Removing collider so dice pass through
         piece.GetComponent<CapsuleCollider>().enabled = false;
         //So that the pieces dont get hit with a raycast (clicking for movement)
-        piece.layer =2;
+        piece.layer = 2;
 
         return piece;
     }
@@ -79,7 +80,8 @@ public class Edge : MonoBehaviour
         this.pieces.Push(piece);
     }
 
-    public GameObject Peek() {
+    public GameObject Peek()
+    {
         return this.pieces.Peek();
     }
 

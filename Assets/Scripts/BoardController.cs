@@ -44,14 +44,34 @@ public class BoardController : MonoBehaviour
     //To determine the current scene
     private Scene scene;
 
+    //Player username indicators
+    public Text p1Name;
+    public Text p2Name;
+
+    //SavedData and display
+    private SaveData saveData;
+    public Text userScoreBoard;
 
     // Start is called before the first frame update
     void Start()
     {
-
         //Getting active scene to tell if its demo or real 
         scene = SceneManager.GetActiveScene();
+        //Getting savedata object
+        saveData = this.gameObject.GetComponent<SaveData>();
 
+        //Printing score
+        if (scene.name == "Edge-Demo")
+            userScoreBoard.text = "User Score Board: \n" + saveData.GetUserNames();
+
+        if (scene.name == "GameScene")
+        {
+            if (PlayerPrefs.HasKey("p1Name") && PlayerPrefs.HasKey("p2Name"))
+            {
+                p1Name.text = PlayerPrefs.GetString("p1Name");
+                p2Name.text = PlayerPrefs.GetString("p2Name");
+            }
+        }
 
         whitesTurn = true;
 
@@ -88,6 +108,8 @@ public class BoardController : MonoBehaviour
         //Creating Bar
         edges[26] = CreateEdge((-1 * (6)) * 0.72f + 4.85f, 0f, 0f, 26);
 
+        //Setting board
+        SetupDefaultPiecePositions();
 
 
         SetupDefaultPiecePositions();
@@ -140,6 +162,9 @@ public class BoardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Getting scores
+        if (scene.name == "Edge-Demo")
+            userScoreBoard.text = GetScores(saveData.GetUserNames(), saveData.GetUserWins(), saveData.GetUserLosses());
 
         if (whitesTurn)
         {
@@ -151,6 +176,7 @@ public class BoardController : MonoBehaviour
             turnText.text = "Red is currently playing...";
         }
         //Updating the pice counter for the demo
+
         if (scene.name == "Edge-Demo")
         {
             int number;
@@ -178,6 +204,20 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    //Returns the user "leaderboards" for the test scene
+    private string GetScores(List<string> userNames, List<int> userWins, List<int> userLosses)
+    {
+        string tmp = "";
+
+        for (int i = 0; i < userNames.Count; i++)
+        {
+            tmp += userNames[i] + "  " + userWins[i].ToString() + "  " + userLosses[i].ToString() + "\n";
+        }
+
+        return tmp;
+
+    }
+
     //Screen when red wins
     public void RedWins()
     {
@@ -188,6 +228,39 @@ public class BoardController : MonoBehaviour
         //Changing winning symbol color 
         winSymbol.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
         winText.text = "RED WINS!!!";
+
+        //Saving user win and loss data
+        string player1 = "";
+        string player2 = "";
+
+        if (PlayerPrefs.HasKey("p1Name") && PlayerPrefs.HasKey("p2Name"))
+        {
+            player1 = PlayerPrefs.GetString("p1Name");
+            player2 = PlayerPrefs.GetString("p2Name");
+        }
+
+        if (PlayerPrefs.HasKey("playAsGuest"))
+        {
+            if (PlayerPrefs.GetInt("playAsGuest") == 0)
+            {
+                if (!(saveData.UserExists(player1)))
+                {
+                    print("initializing P1");
+                    //Create user
+                    saveData.InitUser(player1);
+                }
+                if (!(saveData.UserExists(player2)))
+                {
+                    print("initializing P2");
+                    //Create user
+                    saveData.InitUser(player2);
+                }
+                saveData.AddWinToUser(player2);
+                saveData.AddLossToUser(player1);
+
+                saveData.Save();
+            }
+        }
     }
     //Screen when white wins
     public void WhiteWins()
@@ -199,6 +272,42 @@ public class BoardController : MonoBehaviour
         //Changing winning symbol color 
         winSymbol.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         winText.text = "WHITE WINS!!!";
+
+        //Saving user win and loss data
+        string player1 = "";
+        string player2 = "";
+
+        if (PlayerPrefs.HasKey("p1Name") && PlayerPrefs.HasKey("p2Name"))
+        {
+            player1 = PlayerPrefs.GetString("p1Name");
+            player2 = PlayerPrefs.GetString("p2Name");
+        }
+
+        print(player1);
+        print(player2);
+
+        if (PlayerPrefs.HasKey("playAsGuest"))
+        {
+            if (PlayerPrefs.GetInt("playAsGuest") == 0)
+            {
+                    if (!(saveData.UserExists(player1)))
+                    {
+                    print("initializing P1");
+                        //Create user
+                        saveData.InitUser(player1);
+                    }
+                    if (!(saveData.UserExists(player2)))
+                    {
+                    print("initializing P2");
+                    //Create user
+                    saveData.InitUser(player2);
+                    }
+                    saveData.AddWinToUser(player1);
+                    saveData.AddLossToUser(player2);
+
+                saveData.Save();
+            }
+        }
     }
 
     //Restarts the scene

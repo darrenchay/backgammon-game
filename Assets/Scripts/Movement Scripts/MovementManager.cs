@@ -47,7 +47,7 @@ public class MovementManager : MonoBehaviour
 
         //initilaizing values
         newRoll = true;
-        completeRoll = new int[4] {-1, -1, -1, -1};
+        completeRoll = new int[4] { -1, -1, -1, -1 };
         allowMovementFrom = -1;
         turnDecided = false;
     }
@@ -193,9 +193,11 @@ public class MovementManager : MonoBehaviour
                 }
             }
         }
-        else {
+        else
+        {
             //If turns are decided
-            if (CheckRollForTurn() == true) {
+            if (CheckRollForTurn() == true)
+            {
                 if (scene.name == "GameScene")
                 {
                     //Showing turn prompt after turn choose
@@ -242,7 +244,7 @@ public class MovementManager : MonoBehaviour
         {
             rollsArray.text = "Your Rolls: { " + completeRoll[0] + ", " + completeRoll[1] + ", " + completeRoll[2] + ", " + completeRoll[3] + "}";
         }
-     }
+    }
 
     //Coroutine used in order to allow a wait in the update function
     IEnumerator UpdateDiceRolls()
@@ -271,7 +273,8 @@ public class MovementManager : MonoBehaviour
         {
             ResetAndSwitchTurns();
         }
-        else {
+        else
+        {
             //It is no longer a new roll
             newRoll = false;
         }
@@ -300,7 +303,8 @@ public class MovementManager : MonoBehaviour
     }
 
     //Resets values and switches turns
-    private void ResetAndSwitchTurns() {
+    private void ResetAndSwitchTurns()
+    {
 
         newRoll = true;
         completeRoll = new int[4] { -1, -1, -1, -1 };
@@ -313,9 +317,12 @@ public class MovementManager : MonoBehaviour
     }
 
     //Destroy the first instance of the find value
-    private void SearchAndDestroyRoll(int find) { 
-        for (int i = 0; i < 4; i++) {
-            if (this.completeRoll[i] == find) {
+    private void SearchAndDestroyRoll(int find)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (this.completeRoll[i] == find)
+            {
                 this.completeRoll[i] = -1;
                 return;
             }
@@ -336,12 +343,14 @@ public class MovementManager : MonoBehaviour
     }
 
     //Setter
-    public void SetNewRoll(bool newRoll) {
+    public void SetNewRoll(bool newRoll)
+    {
         this.newRoll = newRoll;
     }
 
     //Determines if a user used all moves
-    public bool UsedAllMoves() {
+    public bool UsedAllMoves()
+    {
         for (int i = 0; i < 4; i++)
         {
             if (this.completeRoll[i] != -1)
@@ -352,7 +361,8 @@ public class MovementManager : MonoBehaviour
         return true;
     }
 
-    public int[] GetCompleteRoll() {
+    public int[] GetCompleteRoll()
+    {
         return this.completeRoll;
     }
 }
