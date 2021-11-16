@@ -546,7 +546,6 @@ public class BoardController : MonoBehaviour
             foreach(Collider coll in colliders)
             {
                 coll.enabled = false;
-                Debug.Log(coll);
             }
         }
 
