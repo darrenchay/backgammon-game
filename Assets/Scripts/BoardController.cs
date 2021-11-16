@@ -52,6 +52,13 @@ public class BoardController : MonoBehaviour
     private SaveData saveData;
     public Text userScoreBoard;
 
+    //Game Components
+    public GameObject table;
+    public GameObject donut;
+    public GameObject board;
+    public GameObject diceFaceCheck;
+    public GameObject[] regions; //All walls etc that have colliders
+
     // Start is called before the first frame update
     void Start()
     {
@@ -507,10 +514,11 @@ public class BoardController : MonoBehaviour
 
         if (tmp.GetComponent<Piece>().GetColor() == "white") {
             tmp.GetComponent<Renderer>().material.color = Color.white;
-        } else if (tmp.GetComponent<Piece>().GetColor() == "red")
-         {
+        }
+        else if (tmp.GetComponent<Piece>().GetColor() == "red")
+        {
             tmp.GetComponent<Renderer>().material.color = Color.red;
-         }
+        }
     }
 
     //Making it whites turn
@@ -529,4 +537,62 @@ public class BoardController : MonoBehaviour
         this.whitesTurn = !this.whitesTurn;
     }
 
+    //Throws the board and shows the respective win screen
+    public void Concede()
+    {
+        foreach(GameObject region in regions)
+        {
+            Collider[] colliders = region.GetComponentsInChildren<Collider>();
+            foreach(Collider coll in colliders)
+            {
+                coll.enabled = false;
+                Debug.Log(coll);
+            }
+        }
+
+        //Removing the collider of the dice face checker
+        Collider diceColl = diceFaceCheck.GetComponent<Collider>();
+        diceColl.enabled = false;
+
+        //Adding colliders to the donut
+        Collider donutColl = donut.GetComponent<Collider>();
+        donutColl.enabled = true;
+        Rigidbody donutRb = donut.GetComponent<Rigidbody>();
+        donutRb.useGravity = true;
+        donutRb.detectCollisions = true;
+        donutRb.AddForce(-transform.forward * 1000);
+        donutRb.AddForce(transform.up * 1000);
+
+
+        //Adding physics to the game board
+        Rigidbody boardRb = board.AddComponent<Rigidbody>() as Rigidbody;
+        boardRb.useGravity = true;
+        boardRb.detectCollisions = true;
+        boardRb.AddForce(-transform.forward * 1000);
+        boardRb.AddTorque(-60, 0, 0);
+        boardRb.AddForce(transform.up * 300);
+        boardRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        Collider boardColl = board.GetComponent<BoxCollider>();
+        boardColl.enabled = true;
+
+        //Enabling collision on table
+        Collider tableColl = table.GetComponent<BoxCollider>();
+        tableColl.enabled = true;
+        //tableColl.isTrigger = true;
+
+        //Adding a force to the table
+        Rigidbody rb = table.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.AddForce(-transform.forward * 1000);
+        rb.AddForce(transform.up * 1000);
+        rb.AddTorque(-60, 0, 0);
+        if (this.whitesTurn)
+        {
+            RedWins();
+        } 
+        else
+        {
+            WhiteWins();
+        }
+    }
 }
