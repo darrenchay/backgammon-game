@@ -565,27 +565,24 @@ public class BoardController : MonoBehaviour
 
 
         //Adding physics to the game board
-        Rigidbody boardRb = board.AddComponent<Rigidbody>() as Rigidbody;
+        Rigidbody boardRb = board.AddComponent<Rigidbody>();
         boardRb.useGravity = true;
         boardRb.detectCollisions = true;
         boardRb.AddForce(-transform.forward * 1000);
         boardRb.AddTorque(-60, 0, 0);
         boardRb.AddForce(transform.up * 300);
-        boardRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         Collider boardColl = board.GetComponent<BoxCollider>();
         boardColl.enabled = true;
 
         //Enabling collision on table
         Collider tableColl = table.GetComponent<BoxCollider>();
         tableColl.enabled = true;
-        //tableColl.isTrigger = true;
 
         //Adding a force to the table
         Rigidbody rb = table.GetComponent<Rigidbody>();
         rb.useGravity = true;
-        rb.AddForce(-transform.forward * 1000);
-        rb.AddForce(transform.up * 1000);
-        rb.AddTorque(-60, 0, 0);
+        rb.AddForce(-transform.forward * 30000);
+        rb.AddTorque(-20000, 0, 20000);
         if (this.whitesTurn)
         {
             RedWins();
