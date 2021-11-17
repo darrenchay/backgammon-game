@@ -531,6 +531,7 @@ public class BoardController : MonoBehaviour
     IEnumerator waitForTurnChange(bool whitesTurn)
     {
         yield return new WaitForSeconds(0.5f);
+        mainCam.enabled = false;
         if (whitesTurn)
         {
             P1Cam.enabled = true;

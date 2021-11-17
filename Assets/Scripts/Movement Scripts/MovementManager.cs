@@ -9,7 +9,6 @@ public class MovementManager : MonoBehaviour
     //Different cameras for each player
     public Camera P1Cam;
     public Camera P2Cam;
-    public Camera mainCam;
 
     //Holds the current roll from either user
     private int[] completeRoll;
@@ -287,38 +286,17 @@ public class MovementManager : MonoBehaviour
 
     }
 
-
-    // Changes the camera after waiting for 1 sec
-    IEnumerator waitForTurnChange(bool whitesTurn)
-    {
-        yield return new WaitForSeconds(0.5f);
-        mainCam.enabled = false;
-        if (whitesTurn)
-        {
-            P1Cam.enabled = true;
-            this.gameObject.GetComponent<BoardController>().WhitesTurn();
-        }
-        else
-        {
-            P2Cam.enabled = true;
-            this.gameObject.GetComponent<BoardController>().RedsTurn();
-        }
-    }
-
     //Checks the dice roll values to determine who plays first
     public bool CheckRollForTurn()
     {
-        AudioListener listener = mainCam.GetComponent<AudioListener>();
         if (completeRoll[0] > completeRoll[1])
         {
-            IEnumerator coroutine = waitForTurnChange(true);
-            StartCoroutine(coroutine);
+            this.gameObject.GetComponent<BoardController>().WhitesTurn();
             return true;
         }
         else if (completeRoll[0] < completeRoll[1])
         {
-            IEnumerator coroutine = waitForTurnChange(false);
-            StartCoroutine(coroutine);
+            this.gameObject.GetComponent<BoardController>().RedsTurn();
             return true;
         }
         //If values are the same, reset and re-roll the dice

@@ -5229,7 +5229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Cam: {fileID: 1062749610}
   P2Cam: {fileID: 415051871}
-  mainCam: {fileID: 0}
+  mainCam: {fileID: 112658306}
   countText: {fileID: 0}
   fromText: {fileID: 0}
   toText: {fileID: 0}
@@ -5272,7 +5272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1Cam: {fileID: 1062749610}
   P2Cam: {fileID: 415051871}
-  mainCam: {fileID: 112658306}
   dice1: {fileID: 501568222}
   dice2: {fileID: 335050431}
   diceFaceChecker: {fileID: 552020894}
