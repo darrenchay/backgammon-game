@@ -96,6 +96,7 @@ public class MovementManager : MonoBehaviour
                     {
                         //Move piece to movementTo
                         int movementTo = int.Parse(hit.transform.name.Substring(5));
+
                         if (this.gameObject.GetComponent<MoveValidator>().IsValidTo(completeRoll, allowMovementFrom, movementTo))
                         {
 
@@ -111,6 +112,7 @@ public class MovementManager : MonoBehaviour
                             else if (!this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeWhiteCount(movementTo) == 1 && allowMovementFrom == 26)
                             {
                                 this.gameObject.GetComponent<BoardController>().SwapPiece(movementTo, 26);
+                                swapOccured = true;
                             }
                             //Check if edge only contains other player color and seeing if a piece needs to be added to the bar
                             else if (this.gameObject.GetComponent<BoardController>().GetWhitesTurn() && this.gameObject.GetComponent<BoardController>().GetEdgeRedCount(movementTo) == 1)
