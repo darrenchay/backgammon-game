@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * TOGGLEMUSIC
+ * mutes music when pressing M
+ */
 public class ToggleMusic : MonoBehaviour
 {
 

@@ -13,6 +13,7 @@ public class DiceFaceCheck : MonoBehaviour
     private Vector3 diceVel2;
     public GameObject Dice1; //reference to dice 1 game object
     public GameObject Dice2; //reference to dice 2 game object
+    private AudioSource diceSound;
 
 
     //Values of the dice
@@ -32,6 +33,15 @@ public class DiceFaceCheck : MonoBehaviour
         diceVel1 = Dice1.GetComponent<Dice>().GetDiceVel();
         diceVel1 = Dice2.GetComponent<Dice>().GetDiceVel();
     }
+
+    void OnTriggerEnter(Collider coll)
+    {
+        diceSound = GetComponent<AudioSource>();
+        Debug.Log(diceSound);
+        Debug.Log("Hit");
+        diceSound.Play();
+    }
+
 
     void OnTriggerStay(Collider col)
     {
