@@ -58,6 +58,7 @@ public class BoardController : MonoBehaviour
     public GameObject board;
     public GameObject diceFaceCheck;
     public GameObject[] regions; //All walls etc that have colliders
+    public GameObject gameTheme;
 
     // Start is called before the first frame update
     void Start()
@@ -225,9 +226,21 @@ public class BoardController : MonoBehaviour
 
     }
 
+    IEnumerator PlayWinMusic()
+    {
+        AudioSource music = gameTheme.GetComponent<AudioSource>();
+        music.Pause();
+        AudioSource winAudio = GetComponent<AudioSource>();
+        winAudio.Play();
+        yield return new WaitForSeconds(3);
+        music.Play();
+
+    }
+
     //Screen when red wins
     public void RedWins()
     {
+        StartCoroutine("PlayWinMusic");
         //Hiding and showing needed screens
         edgeNumbers.SetActive(false);
         winScreen.SetActive(true);
@@ -272,6 +285,7 @@ public class BoardController : MonoBehaviour
     //Screen when white wins
     public void WhiteWins()
     {
+        StartCoroutine("PlayWinMusic");
         //Hiding and showing needed screens
         edgeNumbers.SetActive(false);
         winScreen.SetActive(true);
