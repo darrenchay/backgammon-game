@@ -246,26 +246,33 @@ public class BoardController : MonoBehaviour
             player2 = PlayerPrefs.GetString("p2Name");
         }
 
-        if (PlayerPrefs.HasKey("playAsGuest"))
+        if (PlayerPrefs.HasKey("p1Guest"))
         {
-            if (PlayerPrefs.GetInt("playAsGuest") == 0)
+            if (PlayerPrefs.GetInt("p1Guest") == 0)
             {
                 if (!(saveData.UserExists(player1)))
                 {
                     print("initializing P1");
                     //Create user
                     saveData.InitUser(player1);
+                    saveData.AddLossToUser(player1);
+                    saveData.Save();
                 }
+            }
+        }
+
+        if (PlayerPrefs.HasKey("p2Guest"))
+        {
+            if (PlayerPrefs.GetInt("p2Guest") == 0)
+            {
                 if (!(saveData.UserExists(player2)))
                 {
                     print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
+                    saveData.AddWinToUser(player2);
+                    saveData.Save();
                 }
-                saveData.AddWinToUser(player2);
-                saveData.AddLossToUser(player1);
-
-                saveData.Save();
             }
         }
     }
@@ -290,29 +297,33 @@ public class BoardController : MonoBehaviour
             player2 = PlayerPrefs.GetString("p2Name");
         }
 
-        print(player1);
-        print(player2);
-
-        if (PlayerPrefs.HasKey("playAsGuest"))
+        if (PlayerPrefs.HasKey("p1Guest"))
         {
-            if (PlayerPrefs.GetInt("playAsGuest") == 0)
+            if (PlayerPrefs.GetInt("p1Guest") == 0)
             {
-                    if (!(saveData.UserExists(player1)))
-                    {
+                if (!(saveData.UserExists(player1)))
+                {
                     print("initializing P1");
-                        //Create user
-                        saveData.InitUser(player1);
-                    }
-                    if (!(saveData.UserExists(player2)))
-                    {
+                    //Create user
+                    saveData.InitUser(player1);
+                    saveData.AddWinToUser(player1);
+                    saveData.Save();
+                }
+            }
+        }
+
+        if (PlayerPrefs.HasKey("p2Guest"))
+        {
+            if (PlayerPrefs.GetInt("p2Guest") == 0)
+            {
+                if (!(saveData.UserExists(player2)))
+                {
                     print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
-                    }
-                    saveData.AddWinToUser(player1);
                     saveData.AddLossToUser(player2);
-
-                saveData.Save();
+                    saveData.Save();
+                }
             }
         }
     }
