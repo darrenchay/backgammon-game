@@ -258,6 +258,11 @@ public class BoardController : MonoBehaviour
                     saveData.AddLossToUser(player1);
                     saveData.Save();
                 }
+                else
+                {
+                    saveData.AddLossToUser(player1);
+                    saveData.Save();
+                }
             }
         }
 
@@ -270,6 +275,11 @@ public class BoardController : MonoBehaviour
                     print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
+                    saveData.AddWinToUser(player2);
+                    saveData.Save();
+                }
+                else
+                {
                     saveData.AddWinToUser(player2);
                     saveData.Save();
                 }
@@ -309,6 +319,10 @@ public class BoardController : MonoBehaviour
                     saveData.AddWinToUser(player1);
                     saveData.Save();
                 }
+                else {
+                    saveData.AddWinToUser(player1);
+                    saveData.Save();
+                }
             }
         }
 
@@ -321,6 +335,10 @@ public class BoardController : MonoBehaviour
                     print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
+                    saveData.AddLossToUser(player2);
+                    saveData.Save();
+                }
+                else {
                     saveData.AddLossToUser(player2);
                     saveData.Save();
                 }
