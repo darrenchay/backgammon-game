@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MovementManager : MonoBehaviour
 {
+    //Different cameras for each player
+    public Camera P1Cam;
+    public Camera P2Cam;
 
     //Holds the current roll from either user
     private int[] completeRoll;
@@ -50,6 +53,8 @@ public class MovementManager : MonoBehaviour
         completeRoll = new int[4] { -1, -1, -1, -1 };
         allowMovementFrom = -1;
         turnDecided = false;
+        P1Cam.enabled = false;
+        P2Cam.enabled = false;
     }
 
     // Update is called once per frame

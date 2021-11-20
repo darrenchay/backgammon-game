@@ -12,6 +12,11 @@ using UnityEngine.SceneManagement;
 public class BoardController : MonoBehaviour
 {
 
+    //Different cameras for each player
+    public Camera P1Cam;
+    public Camera P2Cam;
+    public Camera mainCam;
+
     //Text and input used for demo
     public Text countText;
     public Text fromText;
@@ -58,6 +63,7 @@ public class BoardController : MonoBehaviour
     public GameObject board;
     public GameObject diceFaceCheck;
     public GameObject[] regions; //All walls etc that have colliders
+
 
     // Start is called before the first frame update
     void Start()
@@ -521,15 +527,36 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    // Changes the camera after waiting for 1 sec
+    IEnumerator waitForTurnChange(bool whitesTurn)
+    {
+        yield return new WaitForSeconds(0.5f);
+        mainCam.enabled = false;
+        if (whitesTurn)
+        {
+            P1Cam.enabled = true;
+            P2Cam.enabled = false;
+            this.whitesTurn = true;
+        }
+        else
+        {
+            P2Cam.enabled = true;
+            P1Cam.enabled = false;
+            this.whitesTurn = false;
+        }
+    }
+
     //Making it whites turn
     public void WhitesTurn() {
-        this.whitesTurn = true;
+        IEnumerator coroutine = waitForTurnChange(true);
+        StartCoroutine(coroutine);
     }
 
     //Making it reds turn
     public void RedsTurn()
     {
-        this.whitesTurn = false;
+        IEnumerator coroutine = waitForTurnChange(false);
+        StartCoroutine(coroutine);
     }
 
     //Switches the turn
