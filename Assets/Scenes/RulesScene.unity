@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -351,6 +351,7 @@ RectTransform:
   - {fileID: 1384225222}
   - {fileID: 267706826}
   - {fileID: 1366026652}
+  - {fileID: 2063319371}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -538,7 +539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 334}
   m_SizeDelta: {x: 70.2552, y: 28.8536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384225223
@@ -969,4 +970,110 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918602879}
+  m_CullTransparentMesh: 1
+--- !u!1 &2063319370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2063319371}
+  - component: {fileID: 2063319373}
+  - component: {fileID: 2063319372}
+  m_Layer: 5
+  m_Name: RulesText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2063319371
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063319370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 446475967}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 18}
+  m_SizeDelta: {x: 700, y: 600}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2063319372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063319370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 11
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Setup:\n\nBackgammon is a game for two players, played on a board consisting
+    of twenty-four narrow triangles called edges. The triangles alternate in color
+    and are grouped into four quadrants of six triangles each. The quadrants are
+    referred to as a player's home board and outer board, and the opponent's home
+    board and outer board. The home and outer boards are separated from each other
+    by a ridge down the center of the board called the bar.\n\nThe edges are numbered
+    for either player starting in that player's home board. The outermost edge is
+    the twenty-four edge, which is also the opponent's one edge. Each player has
+    fifteen pieces of their own color. The initial setup of these checkers is fixed
+    (press the setup button put pieces in correct positions).\n\nObjective:\n\nThe
+    object of the game is move all your checkers into your own home board and then
+    bear them off. The first player to bear off all of their checkers wins the game.
+    \n\nMovement of Checkers:\n\nTo start the game, each player throws a single die.
+    This determines both the player to go first and the numbers to be played. The
+    player with the higher roll goes first. The player rolls two die. The roll of
+    the dice indicates how many edges they may travel. The following rules apply:\n\n1.
+    A checker may be moved only to an open point, one that is not occupied by two
+    or more opposing checkers.\n\n2. The numbers on the two dice constitute separate
+    moves. The moves may be combined to use on a single piece.\n\n3. If the player
+    rolls two of the same, the number of moves they have that turn doubles (ex: if
+    player rolls 5 and 5, they now have 4 moves of 5).\n\n4. A player must use all
+    their available rolls (if legally possible).\n\nHitting and Entering:\n\nDuring
+    their turn, a player may use their move to \"hit\" an opposing player's piece
+    onto the center bar, if that piece is alone on it's edge.\n\nBearing Off:\n\nOnce
+    a player has moved all of his fifteen checkers into his home board, he may commence
+    bearing off. A player bears off a checker by rolling a number that corresponds
+    to the point on which the checker resides, and then removing that checker from
+    the board.\n\n\nRules adapted from: https://www.bkgm.com/rules.html"
+--- !u!222 &2063319373
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063319370}
   m_CullTransparentMesh: 1
