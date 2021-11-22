@@ -12,6 +12,11 @@ using UnityEngine.SceneManagement;
 public class BoardController : MonoBehaviour
 {
 
+    //Different cameras for each player
+    public Camera P1Cam;
+    public Camera P2Cam;
+    public Camera mainCam;
+
     //Text and input used for demo
     public Text countText;
     public Text fromText;
@@ -51,6 +56,14 @@ public class BoardController : MonoBehaviour
     //SavedData and display
     private SaveData saveData;
     public Text userScoreBoard;
+
+    //Game Components
+    public GameObject table;
+    public GameObject donut;
+    public GameObject board;
+    public GameObject diceFaceCheck;
+    public GameObject[] regions; //All walls etc that have colliders
+
 
     // Start is called before the first frame update
     void Start()
@@ -499,21 +512,43 @@ public class BoardController : MonoBehaviour
 
         if (tmp.GetComponent<Piece>().GetColor() == "white") {
             tmp.GetComponent<Renderer>().material.color = Color.white;
-        } else if (tmp.GetComponent<Piece>().GetColor() == "red")
-         {
+        }
+        else if (tmp.GetComponent<Piece>().GetColor() == "red")
+        {
             tmp.GetComponent<Renderer>().material.color = Color.red;
-         }
+        }
+    }
+
+    // Changes the camera after waiting for 1 sec
+    IEnumerator waitForTurnChange(bool whitesTurn)
+    {
+        yield return new WaitForSeconds(0.5f);
+        mainCam.enabled = false;
+        if (whitesTurn)
+        {
+            P1Cam.enabled = true;
+            P2Cam.enabled = false;
+            this.whitesTurn = true;
+        }
+        else
+        {
+            P2Cam.enabled = true;
+            P1Cam.enabled = false;
+            this.whitesTurn = false;
+        }
     }
 
     //Making it whites turn
     public void WhitesTurn() {
-        this.whitesTurn = true;
+        IEnumerator coroutine = waitForTurnChange(true);
+        StartCoroutine(coroutine);
     }
 
     //Making it reds turn
     public void RedsTurn()
     {
-        this.whitesTurn = false;
+        IEnumerator coroutine = waitForTurnChange(false);
+        StartCoroutine(coroutine);
     }
 
     //Switches the turn
@@ -521,4 +556,58 @@ public class BoardController : MonoBehaviour
         this.whitesTurn = !this.whitesTurn;
     }
 
+    //Throws the board and shows the respective win screen
+    public void Concede()
+    {
+        foreach(GameObject region in regions)
+        {
+            Collider[] colliders = region.GetComponentsInChildren<Collider>();
+            foreach(Collider coll in colliders)
+            {
+                coll.enabled = false;
+            }
+        }
+
+        //Removing the collider of the dice face checker
+        Collider diceColl = diceFaceCheck.GetComponent<Collider>();
+        diceColl.enabled = false;
+
+        //Adding colliders to the donut
+        Collider donutColl = donut.GetComponent<Collider>();
+        donutColl.enabled = true;
+        Rigidbody donutRb = donut.GetComponent<Rigidbody>();
+        donutRb.useGravity = true;
+        donutRb.detectCollisions = true;
+        donutRb.AddForce(-transform.forward * 1000);
+        donutRb.AddForce(transform.up * 1000);
+
+
+        //Adding physics to the game board
+        Rigidbody boardRb = board.AddComponent<Rigidbody>();
+        boardRb.useGravity = true;
+        boardRb.detectCollisions = true;
+        boardRb.AddForce(-transform.forward * 1000);
+        boardRb.AddTorque(-60, 0, 0);
+        boardRb.AddForce(transform.up * 300);
+        Collider boardColl = board.GetComponent<BoxCollider>();
+        boardColl.enabled = true;
+
+        //Enabling collision on table
+        Collider tableColl = table.GetComponent<BoxCollider>();
+        tableColl.enabled = true;
+
+        //Adding a force to the table
+        Rigidbody rb = table.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.AddForce(-transform.forward * 30000);
+        rb.AddTorque(-20000, 0, 20000);
+        if (this.whitesTurn)
+        {
+            RedWins();
+        } 
+        else
+        {
+            WhiteWins();
+        }
+    }
 }
