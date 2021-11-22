@@ -125,9 +125,6 @@ public class BoardController : MonoBehaviour
         SetupDefaultPiecePositions();
 
 
-        SetupDefaultPiecePositions();
-
-
     }
 
     public void SetupDefaultPiecePositions()
@@ -258,13 +255,11 @@ public class BoardController : MonoBehaviour
             {
                 if (!(saveData.UserExists(player1)))
                 {
-                    print("initializing P1");
                     //Create user
                     saveData.InitUser(player1);
                 }
                 if (!(saveData.UserExists(player2)))
                 {
-                    print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
                 }
@@ -295,9 +290,6 @@ public class BoardController : MonoBehaviour
             player1 = PlayerPrefs.GetString("p1Name");
             player2 = PlayerPrefs.GetString("p2Name");
         }
-
-        print(player1);
-        print(player2);
 
         if (PlayerPrefs.HasKey("playAsGuest"))
         {

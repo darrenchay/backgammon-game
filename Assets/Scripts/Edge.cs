@@ -18,8 +18,49 @@ public class Edge : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
-        redCount = 0;
-        whiteCount = 0;
+        //Dirty bug fix (should be looked into, however fixes the bug manually)
+        if (this.gameObject.name.Substring(5) == "23")
+        {
+            redCount = 2;
+            whiteCount = 0;
+        } else if (this.gameObject.name.Substring(5) == "0") {
+            redCount = 0;
+            whiteCount = 2;
+        }
+        else if (this.gameObject.name.Substring(5) == "5")
+        {
+            redCount = 5;
+            whiteCount = 0;
+        }
+        else if (this.gameObject.name.Substring(5) == "7")
+        {
+            redCount = 3;
+            whiteCount = 0;
+        }
+        else if (this.gameObject.name.Substring(5) == "11")
+        {
+            redCount = 0;
+            whiteCount = 5;
+        }
+        else if (this.gameObject.name.Substring(5) == "12")
+        {
+            redCount = 5;
+            whiteCount = 0;
+        }
+        else if (this.gameObject.name.Substring(5) == "16")
+        {
+            redCount = 0;
+            whiteCount = 3;
+        }
+        else if (this.gameObject.name.Substring(5) == "18")
+        {
+            redCount = 0;
+            whiteCount = 5;
+        }
+        else {
+            redCount = 0;
+            whiteCount = 0;
+        }
     }
 
     //Used to create a piece
@@ -66,11 +107,11 @@ public class Edge : MonoBehaviour
         //increasing counts
         if (color == "red")
         {
-            redCount++;
+            this.redCount += 1;
         }
         else if (color == "white")
         {
-            whiteCount++;
+            this.whiteCount += 1;
         }
 
         //Creating piece
@@ -100,11 +141,11 @@ public class Edge : MonoBehaviour
         //Decreasing counters
         if (temp.GetComponent<Piece>().GetColor() == "red")
         {
-            redCount--;
+            this.redCount--;
         }
         else if (temp.GetComponent<Piece>().GetColor() == "white")
         {
-            whiteCount--;
+            this.whiteCount--;
         }
 
         //Destroying top of stack so it does not show on the board
