@@ -174,7 +174,7 @@ public class MoveValidator : MonoBehaviour
             return true;
         }
 
-        //default value 
+        //default value
         return false;
 
     }
