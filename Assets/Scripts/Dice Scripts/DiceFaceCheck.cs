@@ -38,7 +38,6 @@ public class DiceFaceCheck : MonoBehaviour
     {
         diceSound = GetComponent<AudioSource>();
         Debug.Log(diceSound);
-        Debug.Log("Hit");
         diceSound.Play();
     }
 
