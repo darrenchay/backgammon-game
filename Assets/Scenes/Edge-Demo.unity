@@ -6119,6 +6119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197fe7724d2a5a64fbc6602fd9974b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  P1Cam: {fileID: 0}
+  P2Cam: {fileID: 0}
+  mainCam: {fileID: 0}
   countText: {fileID: 7977278577267919422}
   fromText: {fileID: 7977278577026095872}
   toText: {fileID: 7977278577778001926}
@@ -6135,6 +6138,12 @@ MonoBehaviour:
   p1Name: {fileID: 0}
   p2Name: {fileID: 0}
   userScoreBoard: {fileID: 867604330}
+  table: {fileID: 0}
+  donut: {fileID: 0}
+  board: {fileID: 0}
+  diceFaceCheck: {fileID: 0}
+  regions: []
+  gameTheme: {fileID: 0}
 --- !u!114 &2091141182546773732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6147,6 +6156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b0368501965f8d45ae79e2d091fa218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  P1Cam: {fileID: 0}
+  P2Cam: {fileID: 0}
   dice1: {fileID: 501568222}
   dice2: {fileID: 335050431}
   diceFaceChecker: {fileID: 552020894}

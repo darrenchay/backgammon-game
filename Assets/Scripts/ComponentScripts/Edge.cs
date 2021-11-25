@@ -66,8 +66,16 @@ public class Edge : MonoBehaviour
     //Used to create a piece
     private GameObject CreatePiece(string color)
     {
-        GameObject piece = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        piece.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
+        GameObject piece;
+        if (color == "red")
+        {
+            piece = (GameObject)Instantiate(Resources.Load("Red_Piece"));
+        }
+        else {
+            piece = (GameObject)Instantiate(Resources.Load("White_Piece"));
+        }
+
+        piece.transform.localScale = new Vector3(0.0125f, 0.0125f, 0.0125f);
         piece.transform.parent = gameObject.transform;
 
         //if on bar

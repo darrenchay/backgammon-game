@@ -14,6 +14,7 @@ public class Piece : MonoBehaviour
     //Sets the color of the mesh per object (red or white)
     public void SetColor(string color)
     {
+        /**
         if (color == "red")
         {
             if (gameObject.GetComponent<MeshRenderer>() != null)
@@ -28,6 +29,7 @@ public class Piece : MonoBehaviour
                 gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
             }
         }
+        **/
         this.color = color;
     }
 
