@@ -65,6 +65,8 @@ public class BoardController : MonoBehaviour
     public GameObject[] regions; //All walls etc that have colliders
     public GameObject gameTheme;
 
+    public Button rollButton;
+
 
     // Start is called before the first frame update
     void Start()
@@ -586,6 +588,7 @@ public class BoardController : MonoBehaviour
     //Making it whites turn
     public void WhitesTurn() {
         IEnumerator coroutine = waitForTurnChange(true);
+        rollButton.interactable = true;
         StartCoroutine(coroutine);
     }
 
@@ -593,12 +596,15 @@ public class BoardController : MonoBehaviour
     public void RedsTurn()
     {
         IEnumerator coroutine = waitForTurnChange(false);
+        rollButton.interactable = true;
         StartCoroutine(coroutine);
     }
 
     //Switches the turn
     public void ToggleTurn() {
         IEnumerator coroutine = waitForTurnChange(!this.whitesTurn);
+        //Disable roll button
+        rollButton.interactable = true;
         StartCoroutine(coroutine);
     }
 

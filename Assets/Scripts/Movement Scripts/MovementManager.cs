@@ -42,6 +42,8 @@ public class MovementManager : MonoBehaviour
     //To determine the current scene
     private Scene scene;
 
+    public Button rollButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -214,6 +216,8 @@ public class MovementManager : MonoBehaviour
                 }
                 turnDecided = true;
                 rollText.text = "Roll";
+                rollButton.interactable = false;
+
             }
         }
 

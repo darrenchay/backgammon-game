@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * DROPDICE
@@ -16,7 +17,8 @@ public class DropDice : MonoBehaviour
     //The board and dicefacechecker object to data share
     public GameObject board;
     public GameObject diceFaceChecker;
-    
+    public Button rollButton;
+
     //Drops the dice from above
     public void Roll() {
 
@@ -37,6 +39,12 @@ public class DropDice : MonoBehaviour
         //Performing a random rotation to ensure random dice rolls
         dice1.transform.Rotate(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f), Space.Self);
         dice2.transform.Rotate(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f), Space.Self);
+
+        //Disable roll button if not deciding turn
+        if (rollButton.GetComponentInChildren<Text>().text != "Decide Turn")
+        {
+            rollButton.interactable = false;
+        }
     }
 
     //Hides the dice
