@@ -37,7 +37,7 @@ public class DiceFaceCheck : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         diceSound = GetComponent<AudioSource>();
-        Debug.Log(diceSound);
+       // Debug.Log(diceSound);
         diceSound.Play();
     }
 
