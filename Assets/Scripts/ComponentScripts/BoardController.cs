@@ -599,7 +599,8 @@ public class BoardController : MonoBehaviour
 
     //Switches the turn
     public void ToggleTurn() {
-        this.whitesTurn = !this.whitesTurn;
+        IEnumerator coroutine = waitForTurnChange(!this.whitesTurn);
+        StartCoroutine(coroutine);
     }
 
     //Throws the board and shows the respective win screen
