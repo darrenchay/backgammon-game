@@ -287,6 +287,7 @@ public class BoardController : MonoBehaviour
             {
                 if (!(saveData.UserExists(player2)))
                 {
+                    print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
                     saveData.AddWinToUser(player2);
@@ -328,7 +329,6 @@ public class BoardController : MonoBehaviour
             {
                 if (!(saveData.UserExists(player1)))
                 {
-                    print("initializing P1");
                     //Create user
                     saveData.InitUser(player1);
                     saveData.AddWinToUser(player1);
@@ -347,7 +347,6 @@ public class BoardController : MonoBehaviour
             {
                 if (!(saveData.UserExists(player2)))
                 {
-                    print("initializing P2");
                     //Create user
                     saveData.InitUser(player2);
                     saveData.AddLossToUser(player2);
@@ -599,7 +598,8 @@ public class BoardController : MonoBehaviour
 
     //Switches the turn
     public void ToggleTurn() {
-        this.whitesTurn = !this.whitesTurn;
+        IEnumerator coroutine = waitForTurnChange(!this.whitesTurn);
+        StartCoroutine(coroutine);
     }
 
     //Throws the board and shows the respective win screen
