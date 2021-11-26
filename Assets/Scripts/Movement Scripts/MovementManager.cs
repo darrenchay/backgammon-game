@@ -214,9 +214,15 @@ public class MovementManager : MonoBehaviour
                     diceRollVisual.SetActive(true);
                     concede.SetActive(true);
                 }
+                completeRoll = new int[4] { -1, -1, -1, -1 };
+                newRoll = true;
+
+                dropDiceLocation.GetComponent<DropDice>().Roll();
+                dropDiceLocation.GetComponent<DropDice>().HideDice();
+                dropDiceLocation.GetComponent<DropDice>().FreezeDice();
+
                 turnDecided = true;
                 rollText.text = "Roll";
-                rollButton.interactable = false;
 
             }
         }
