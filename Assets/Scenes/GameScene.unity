@@ -279,7 +279,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 55, y: 180, z: 0}
 --- !u!1 &144683960
 GameObject:
@@ -1116,7 +1116,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415051869}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &415051871
 Camera:
   m_ObjectHideFlags: 0
@@ -2640,7 +2640,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062749608}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1062749610
 Camera:
   m_ObjectHideFlags: 0
@@ -3431,6 +3431,7 @@ MonoBehaviour:
   dice2: {fileID: 335050431}
   board: {fileID: 2091141182546773730}
   diceFaceChecker: {fileID: 552020894}
+  rollButton: {fileID: 972670804}
 --- !u!4 &1236202866
 Transform:
   m_ObjectHideFlags: 0
@@ -4951,7 +4952,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1806137923}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5619,6 +5620,7 @@ MonoBehaviour:
   - {fileID: 1362038809}
   - {fileID: 2091141182546773730}
   gameTheme: {fileID: 1297491291}
+  rollButton: {fileID: 972670804}
 --- !u!114 &2091141182546773732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5642,6 +5644,7 @@ MonoBehaviour:
   turnPrompt: {fileID: 1106795737}
   diceRollVisual: {fileID: 1103563789}
   concede: {fileID: 1176833983}
+  rollButton: {fileID: 972670804}
 --- !u!114 &2091141182546773733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5812,7 +5815,7 @@ Transform:
   - {fileID: 3040954031505806584}
   - {fileID: 7486513698187176117}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3690106904497302184
 Transform:

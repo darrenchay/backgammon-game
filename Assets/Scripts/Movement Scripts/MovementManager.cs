@@ -42,6 +42,8 @@ public class MovementManager : MonoBehaviour
     //To determine the current scene
     private Scene scene;
 
+    public Button rollButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -212,8 +214,16 @@ public class MovementManager : MonoBehaviour
                     diceRollVisual.SetActive(true);
                     concede.SetActive(true);
                 }
+                completeRoll = new int[4] { -1, -1, -1, -1 };
+                newRoll = true;
+
+                dropDiceLocation.GetComponent<DropDice>().Roll();
+                dropDiceLocation.GetComponent<DropDice>().HideDice();
+                dropDiceLocation.GetComponent<DropDice>().FreezeDice();
+
                 turnDecided = true;
                 rollText.text = "Roll";
+
             }
         }
 
