@@ -9,6 +9,8 @@ using UnityEngine;
 public class ToggleMusic : MonoBehaviour
 {
 
+    public GameObject rules;
+
     // Update is called once per frame
     void Update()
     {
@@ -17,6 +19,12 @@ public class ToggleMusic : MonoBehaviour
         {
             //Debug.Log("Toggling Mute");
             audio.mute = !audio.mute;
+        }
+
+        // Hijacking this for the in game rules. -james
+        if (Input.GetKeyDown("r"))
+        {
+            rules.SetActive(!rules.activeSelf);
         }
     }
 }
