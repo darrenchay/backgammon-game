@@ -60,6 +60,7 @@ public class BoardController : MonoBehaviour
     //Game Components
     public GameObject table;
     public GameObject donut;
+    public GameObject decorationPieces;
     public GameObject board;
     public GameObject diceFaceCheck;
     public GameObject[] regions; //All walls etc that have colliders
@@ -633,6 +634,14 @@ public class BoardController : MonoBehaviour
         donutRb.AddForce(-transform.forward * 1000);
         donutRb.AddForce(transform.up * 1000);
 
+        //adding colliders to decoration pieces
+        Collider DPieceColl = decorationPieces.GetComponent<Collider>();
+        Rigidbody DPieceb   = decorationPieces.GetComponent<Rigidbody>();
+        DPieceColl.enabled  = true;
+        DPieceb.useGravity  = true;
+        DPieceb.detectCollisions = true;
+        DPieceb.AddForce(-transform.forward * 1000);
+        DPieceb.AddForce(transform.up * 1000);
 
         //Adding physics to the game board
         Rigidbody boardRb = board.AddComponent<Rigidbody>();
